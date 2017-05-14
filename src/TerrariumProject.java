@@ -6,16 +6,12 @@ import java.awt.EventQueue;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableModel;
 import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.JTable;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class TerrariumProject {
@@ -83,7 +79,6 @@ public class TerrariumProject {
 		list = new JList<>();
 		list.setBounds(41, 60, 609, 222);
 		panel.add(list);
-
 
 		JLabel lblNewLabel_1 = new JLabel("TOTAL");
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
