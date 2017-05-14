@@ -38,5 +38,8 @@ public class Main {
 				myConn.close();
 			}
 		}
+		
+		TerrariumProject ui = new TerrariumProject();
+		ui.run();
 	}
 }
