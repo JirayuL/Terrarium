@@ -1,8 +1,9 @@
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -16,8 +17,10 @@ import java.awt.event.ActionEvent;
 public class TerrariumProject extends JFrame{
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField idField;
+	private JTextField quantityField;
+	private JList list;
+	private static int number = 0;
 
 	/**
 	 * Create the application.
@@ -50,21 +53,21 @@ public class TerrariumProject extends JFrame{
 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
 		panel.add(lblNewLabel);
 
-		textField = new JTextField();
-		textField.setBounds(142, 22, 130, 26);
-		panel.add(textField);
-		textField.setColumns(10);
+		idField = new JTextField();
+		idField.setBounds(142, 22, 130, 26);
+		panel.add(idField);
+		idField.setColumns(10);
 
 		JLabel lblQuantity = new JLabel("Quantity :");
 		lblQuantity.setBounds(305, 27, 62, 16);
 		panel.add(lblQuantity);
 
-		textField_1 = new JTextField();
-		textField_1.setBounds(379, 22, 130, 26);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		quantityField = new JTextField();
+		quantityField.setBounds(379, 22, 130, 26);
+		panel.add(quantityField);
+		quantityField.setColumns(10);
 
-		JList list = new JList();
+		list = new JList<>();
 		list.setBounds(41, 60, 609, 222);
 		panel.add(list);
 
@@ -84,7 +87,16 @@ public class TerrariumProject extends JFrame{
 		panel.add(btnCheckout);
 
 		JButton btnAdd = new JButton("ADD");
+		btnAdd.addActionListener((e) -> {
+			addToList(idField.getText(), quantityField.getText());
+			idField.setText("");
+			quantityField.setText("");
+		});
 		btnAdd.setBounds(533, 22, 117, 29);
 		panel.add(btnAdd);
+	}
+
+	private void addToList(String id, String qty) {
+		list.add(new JTable(1, 5));
 	}
 }
