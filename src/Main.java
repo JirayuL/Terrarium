@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,8 +9,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import terrariumGUI.TerrariumGUI;
+
 public class Main {
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, IOException {
 
 		Connection myConn = null;
 		Statement myStmt = null;
@@ -18,7 +21,7 @@ public class Main {
 
 		try {
 			// 1. Get a connection to database
-			myConn = DriverManager.getConnection("jdbc:mysql://158.108.140.34:3306/Terrarium", "root", "1234");
+			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Terrarium", "root", "");
 
 			// 2. Create a statement
 			myStmt = myConn.createStatement();
@@ -48,7 +51,7 @@ public class Main {
 			}
 		}
 		
-		TerrariumProject ui = new TerrariumProject();
+		TerrariumGUI ui = new TerrariumGUI();
 		ui.run();
 	}
 }
