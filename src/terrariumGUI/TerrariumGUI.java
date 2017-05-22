@@ -8,6 +8,7 @@ import java.awt.EventQueue;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import application.CashierMachine;
 import database.Store;
 
 import javax.swing.JTextField;
@@ -19,6 +20,7 @@ import java.awt.List;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.awt.event.ActionEvent;
 
@@ -31,8 +33,8 @@ public class TerrariumGUI extends JFrame {
 	private List list;
 	private JTable table;
 	private PaymentGUI paymentGUI;
-	private static int number = 0;
-	
+	private java.util.List<ProductLine> productLine = new ArrayList<ProductLine>();
+	private CashierMachine cashier = new CashierMachine();
 
 	/**
 	 * Create the application.
@@ -104,9 +106,14 @@ public class TerrariumGUI extends JFrame {
 
 		JButton btnAdd = new JButton("ADD");
 		btnAdd.addActionListener((e) -> {
-			String id = quantityField.getText();
-			 if (InMap(id))
-				 
+			String id = idField.getText();
+			int qty = Integer.parseInt(quantityField.getText());
+			if (InMap(id)) {
+				double getPrice = Double.parseDouble(store.getProductMap().get(id).get(1));
+				String name = store.getProductMap().get(id).get(0);
+				productLine.add(new ProductLine(Integer.parseInt(id), name, getPrice));
+				cashier.add(getPrice, qty);
+			}
 			// addToTable(idField.getText(), id);
 			idField.setText("");
 			quantityField.setText("");
@@ -119,7 +126,7 @@ public class TerrariumGUI extends JFrame {
 
 	}
 
-	 private boolean InMap(String id) {
-	 return store.getProductMap().containsKey(id);
-	 }
+	private boolean InMap(String id) {
+		return store.getProductMap().containsKey(id);
+	}
 }
