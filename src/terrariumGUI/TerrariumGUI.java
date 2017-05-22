@@ -114,16 +114,11 @@ public class TerrariumGUI extends JFrame {
 				productLine.add(new ProductLine(Integer.parseInt(id), name, getPrice));
 				cashier.add(getPrice, qty);
 			}
-			// addToTable(idField.getText(), id);
 			idField.setText("");
 			quantityField.setText("");
 		});
 		btnAdd.setBounds(533, 22, 117, 29);
 		panel.add(btnAdd);
-	}
-
-	private void addToTable(String id, String qty) {
-
 	}
 
 	private boolean InMap(String id) {
