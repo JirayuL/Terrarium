@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Store {
 	private static Store store = null;
@@ -18,11 +19,11 @@ public class Store {
 		Connection myConn = null;
 		Statement myStmt = null;
 		ResultSet myRs = null;
-		HashMap<String, List<String>> myMap = new HashMap<>();
+		Map<String, List<String>> myMap = new HashMap<>();
 
 		try {
 			// 1. Get a connection to database
-			myConn = DriverManager.getConnection("jdbc:mysql://158.108.140.34:3306/Terrarium", "root", "1234");
+			myConn = DriverManager.getConnection("jdbc:mysql://158.108.137.58:3306/Terrarium", "root", "1234");
 
 			// 2. Create a statement
 			myStmt = myConn.createStatement();
@@ -67,6 +68,13 @@ public class Store {
 
 	public HashMap<String, List<String>> getMyMap() {
 		return myMap;
+	}
+
+	public static void main(String[] args) {
+		Store store = Store.getInstance();
+		for (String string : store.getMyMap().keySet()) {
+			System.out.println(string);
+		}
 	}
 
 }
