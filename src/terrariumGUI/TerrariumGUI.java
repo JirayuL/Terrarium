@@ -1,6 +1,5 @@
 package terrariumGUI;
 
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -8,6 +7,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import database.Store;
+
 import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.JTable;
@@ -15,10 +17,12 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 
-public class TerrariumGUI extends JFrame{
+public class TerrariumGUI extends JFrame {
 
+	private Store store;
 	private JFrame frame;
 	private JTextField idField;
 	private JTextField quantityField;
@@ -28,11 +32,13 @@ public class TerrariumGUI extends JFrame{
 
 	/**
 	 * Create the application.
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
-	public TerrariumGUI() throws IOException {
+	public TerrariumGUI(Store store) throws IOException {
+		this.store = store;
 		paymentGUI = new PaymentGUI();
-        initComponents();
+		initComponents();
 	}
 
 	public void run() {
@@ -47,7 +53,7 @@ public class TerrariumGUI extends JFrame{
 		frame = new JFrame();
 		frame.setTitle("Terrarium");
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 700 , 400);
+		frame.setBounds(100, 100, 700, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel();
@@ -86,15 +92,17 @@ public class TerrariumGUI extends JFrame{
 		JButton btnCheckout = new JButton("Check Out");
 		btnCheckout.setFont(new Font("Lucida Grande", Font.PLAIN, 23));
 		btnCheckout.addActionListener((e) -> {
-				System.out.println("eiei");
-				paymentGUI.run();
+			System.out.println("eiei");
+			paymentGUI.run();
 		});
 		btnCheckout.setBounds(506, 294, 144, 78);
 		panel.add(btnCheckout);
 
 		JButton btnAdd = new JButton("ADD");
 		btnAdd.addActionListener((e) -> {
-			addToList(idField.getText(), quantityField.getText());
+			String id = quantityField.getText();
+			if (InMap(id))
+				addToList(idField.getText(), id);
 			idField.setText("");
 			quantityField.setText("");
 		});
@@ -105,5 +113,8 @@ public class TerrariumGUI extends JFrame{
 	private void addToList(String id, String qty) {
 		list.add(new JTable(1, 5));
 	}
-}
 
+	private boolean InMap(String id) {
+		return store.getMyMap().containsKey(id);
+	}
+}
