@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.JTable;
 import java.awt.Font;
+import java.awt.List;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -26,9 +28,11 @@ public class TerrariumGUI extends JFrame {
 	private JFrame frame;
 	private JTextField idField;
 	private JTextField quantityField;
-	private JList list;
+	private List list;
+	private JTable table;
 	private PaymentGUI paymentGUI;
 	private static int number = 0;
+	
 
 	/**
 	 * Create the application.
@@ -79,7 +83,7 @@ public class TerrariumGUI extends JFrame {
 		panel.add(quantityField);
 		quantityField.setColumns(10);
 
-		list = new JList<>();
+		list = new List();
 		list.setBounds(41, 60, 609, 222);
 		panel.add(list);
 
@@ -101,8 +105,9 @@ public class TerrariumGUI extends JFrame {
 		JButton btnAdd = new JButton("ADD");
 		btnAdd.addActionListener((e) -> {
 			String id = quantityField.getText();
-			if (InMap(id))
-				addToList(idField.getText(), id);
+			 if (InMap(id))
+				 
+			// addToTable(idField.getText(), id);
 			idField.setText("");
 			quantityField.setText("");
 		});
@@ -110,11 +115,11 @@ public class TerrariumGUI extends JFrame {
 		panel.add(btnAdd);
 	}
 
-	private void addToList(String id, String qty) {
-		list.add(new JTable(1, 5));
+	private void addToTable(String id, String qty) {
+
 	}
 
-	private boolean InMap(String id) {
-		return store.getMyMap().containsKey(id);
-	}
+	 private boolean InMap(String id) {
+	 return store.getProductMap().containsKey(id);
+	 }
 }

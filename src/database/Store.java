@@ -7,19 +7,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
+
+import terrariumGUI.ProductLine;
 
 public class Store {
 	private static Store store = null;
 	HashMap<String, List<String>> myMap;
+	List<ProductLine> productLine = new ArrayList<>();
+	Map<String, List<String>> productMap = new HashMap<>();
 
 	private Store() throws SQLException {
 		Connection myConn = null;
 		Statement myStmt = null;
 		ResultSet myRs = null;
-		Map<String, List<String>> myMap = new HashMap<>();
 
 		try {
 			// 1. Get a connection to database
@@ -33,14 +39,22 @@ public class Store {
 
 			// 4. Process the result set
 			while (myRs.next()) {
-				System.out.println(
-						myRs.getString("product_id") + ", " + myRs.getString("name") + ", " + myRs.getString("price"));
+				// For check data in the database
+				// System.out.println(
+				// myRs.getString("product_id") + ", " + myRs.getString("name")
+				// + ", " + myRs.getString("price"));
 				myMap.put(myRs.getString("product_id"),
 						new ArrayList<String>(Arrays.asList(myRs.getString("name"), myRs.getString("price"))));
+				productLine.add(
+						new ProductLine(myRs.getInt("product_id"), myRs.getString("name"), myRs.getDouble("price")));
 			}
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		} finally {
+			// For check the database in List
+			// for (ProductLine productLine : line) {
+			// System.out.println(productLine);
+			// }
 			if (myRs != null) {
 				myRs.close();
 			}
@@ -66,15 +80,12 @@ public class Store {
 
 	}
 
-	public HashMap<String, List<String>> getMyMap() {
-		return myMap;
+	public List<ProductLine> getProductLine() {
+		return productLine;
 	}
 
-	public static void main(String[] args) {
-		Store store = Store.getInstance();
-		for (String string : store.getMyMap().keySet()) {
-			System.out.println(string);
-		}
+	public Map<String, List<String>> getProductMap() {
+		return productMap;
 	}
 
 }
