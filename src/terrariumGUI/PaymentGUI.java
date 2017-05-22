@@ -8,13 +8,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class PaymentGUI {
+import application.CashierMachine;
+
+public class PaymentGUI implements Observer{
 
 	private JFrame frame;
 	private JTextField textField;
@@ -158,6 +162,16 @@ public class PaymentGUI {
 	
 	public void run() {
 		frame.setVisible(true);
+	}
+
+	@Override
+	public void update(Observable subject, Object info) {
+		if (info != null) System.out.println(info);
+        if (subject instanceof CashierMachine) {
+        	CashierMachine cashierMachine = (CashierMachine) subject;
+//            labelBalance.setText((int) purse.getBalance() + " Baht");
+        }
+		
 	}
 
 	
