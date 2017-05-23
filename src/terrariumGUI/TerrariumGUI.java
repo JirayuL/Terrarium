@@ -23,6 +23,8 @@ import java.awt.List;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -85,10 +87,22 @@ public class TerrariumGUI extends JFrame {
 		lblQuantity.setBounds(305, 27, 62, 16);
 		panel.add(lblQuantity);
 
-		quantityField = new JTextField();
+		quantityField = new JTextField("1");
 		quantityField.setBounds(379, 22, 130, 26);
 		panel.add(quantityField);
 		quantityField.setColumns(10);
+		quantityField.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				// Do nothing
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				quantityField.setText("");
+			}
+		});
 
 		String[] COLUMN_NAMES = { "#", "Product ID", "Name", "Quantity", "Total", "Cancel" };
 		DefaultTableModel dmodel = new DefaultTableModel();
@@ -119,8 +133,8 @@ public class TerrariumGUI extends JFrame {
 		JButton btnAdd = new JButton("ADD");
 		btnAdd.addActionListener((e) -> {
 			String id = idField.getText();
-			int qty = Integer.parseInt(quantityField.getText());
-			if (InMap(id)) {
+			if (InMap(id) && quantityField != null) {
+				int qty = Integer.parseInt(quantityField.getText());
 				double getPrice = Double.parseDouble(store.getProductMap().get(id).get(1));
 				String name = store.getProductMap().get(id).get(0);
 				productLine.add(new ProductLine(Integer.parseInt(id), name, getPrice));
@@ -129,7 +143,7 @@ public class TerrariumGUI extends JFrame {
 						String.format("%f", getPrice * qty), "Cancel" });
 			}
 			idField.setText("");
-			quantityField.setText("");
+			quantityField.setText("1");
 		});
 		btnAdd.setBounds(533, 22, 117, 29);
 		panel.add(btnAdd);
@@ -143,9 +157,5 @@ public class TerrariumGUI extends JFrame {
 
 	private boolean InMap(String id) {
 		return store.getProductMap().containsKey(id);
-	}
-
-	private void putInList() {
-
 	}
 }

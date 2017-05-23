@@ -9,6 +9,10 @@ import javax.swing.table.AbstractTableModel;
 import database.Store;
 
 public class ProductTableModel extends AbstractTableModel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Store store;
 	private String[] COLUMN_NAMES = new String[] { "Product ID", "Name", "Quantity", "Total", "Cancel" };
 	private List<ProductLine> productLine = new ArrayList<ProductLine>();
