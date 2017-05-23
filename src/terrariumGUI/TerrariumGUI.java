@@ -38,10 +38,8 @@ import java.util.Vector;
 
 public class TerrariumGUI extends JFrame implements Observer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	private static TerrariumGUI instance;
 	private Store store;
 	private JFrame frame;
 	private JTextField idField, quantityField;
@@ -61,11 +59,17 @@ public class TerrariumGUI extends JFrame implements Observer {
 	 * 
 	 * @throws IOException
 	 */
-	public TerrariumGUI(Store store, CashierMachine cashier, PaymentGUI paymentGUI) {
-		this.store = store;
-		this.cashier = cashier;
-		this.paymentGUI = paymentGUI;
+	public TerrariumGUI() {
+		this.store = Store.getInstance();
+		this.cashier = CashierMachine.getInstance();
+		this.paymentGUI = PaymentGUI.getInstance();
 		initComponents();
+	}
+
+	public static TerrariumGUI getInstance() {
+		if (instance == null)
+			instance = new TerrariumGUI();
+		return instance;
 	}
 
 	public void run() {
@@ -201,6 +205,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 	}
 
 	public void clearAllTable() {
+		System.out.println();
 		int rowCount = dmodel.getRowCount();
 		for (int i = rowCount - 1; i >= 0; i--) {
 			dmodel.removeRow(i);
@@ -268,7 +273,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 
 				for (Vector rowValue : selectedRows) {
 					int rowIndex = rowData.indexOf(rowValue);
-					cashier.subtractSubtotal(Double.parseDouble(model.getValueAt(rowIndex, 4)+""));
+					cashier.subtractSubtotal(Double.parseDouble(model.getValueAt(rowIndex, 4) + ""));
 					model.removeRow(rowIndex);
 				}
 			}

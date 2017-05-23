@@ -2,12 +2,12 @@ package application;
 
 import java.util.Observable;
 
+import terrariumGUI.ChangeGUI;
+
 public class CashierMachine extends Observable {
+	private static CashierMachine instance;
 	private final double VAT = 0.07;
-	private double subtotal;
-	private double total;
-	private double vat;
-	private double cash;
+	private double subtotal, total, vat, cash, change;
 
 	/**
 	 * Initialize a
@@ -19,6 +19,12 @@ public class CashierMachine extends Observable {
 		cash = 0;
 	}
 
+	public static CashierMachine getInstance() {
+		if (instance == null)
+			instance = new CashierMachine();
+		return instance;
+	}
+
 	private void calculateVAT() {
 		vat = subtotal * VAT;
 	}
@@ -26,7 +32,7 @@ public class CashierMachine extends Observable {
 	public double getSubtotal() {
 		return subtotal;
 	}
-	
+
 	public void subtractSubtotal(double money) {
 		this.subtotal -= money;
 		calculateVAT();
@@ -71,6 +77,10 @@ public class CashierMachine extends Observable {
 		total = subtotal + vat;
 	}
 
+	private void calculateChange() {
+		change = cash - total;
+	}
+
 	public void add(double price, int qty) {
 		subtotal += price * qty;
 		calculateVAT();
@@ -79,4 +89,8 @@ public class CashierMachine extends Observable {
 		notifyObservers();
 	}
 
+	public double getChange() {
+		calculateChange();
+		return change;
+	}
 }

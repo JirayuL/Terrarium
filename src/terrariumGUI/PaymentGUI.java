@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 import application.CashierMachine;
 
 public class PaymentGUI implements Observer {
+	private static PaymentGUI instance;
 	private CashierMachine cashier;
 	private JFrame frame;
 	private JTextField textCash;
@@ -38,8 +39,8 @@ public class PaymentGUI implements Observer {
 	 * @param cashier
 	 * @throws IOException
 	 */
-	public PaymentGUI(CashierMachine cashier) {
-		this.cashier = cashier;
+	public PaymentGUI() {
+		this.cashier = CashierMachine.getInstance();
 		try {
 			initialize();
 		} catch (IOException e) {
@@ -47,6 +48,10 @@ public class PaymentGUI implements Observer {
 		}
 	}
 
+	public static PaymentGUI getInstance(){
+		if(instance == null ) instance = new PaymentGUI();
+		return instance;
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 * 
@@ -212,7 +217,7 @@ public class PaymentGUI implements Observer {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						ChangeGUI changeGUI = new ChangeGUI();
+						ChangeGUI changeGUI = ChangeGUI.getInstance();
 						changeGUI.run();
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -227,6 +232,7 @@ public class PaymentGUI implements Observer {
 		btnCancel.setBounds(353, 265, 110, 70);
 		btnCancel.addActionListener((e) -> {
 			close();
+			cashier.setCash(0);
 		});
 		frame.getContentPane().add(btnCancel);
 
