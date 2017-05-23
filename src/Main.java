@@ -15,11 +15,9 @@ import terrariumGUI.TerrariumGUI;
 public class Main {
 	public static void main(String[] args) throws SQLException, IOException {
 
-//		Store store = Store.getInstance();
-//
-//		TerrariumGUI ui = new TerrariumGUI(store);
-//		ui.run();
-		
-		System.out.println(Integer.parseInt(null));
+		Store store = Store.getInstance();
+
+		TerrariumGUI ui = new TerrariumGUI(store);
+		ui.run();
 	}
 }

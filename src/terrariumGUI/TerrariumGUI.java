@@ -139,8 +139,8 @@ public class TerrariumGUI extends JFrame {
 				String name = store.getProductMap().get(id).get(0);
 				productLine.add(new ProductLine(Integer.parseInt(id), name, getPrice));
 				cashier.add(getPrice, qty);
-				dmodel.addRow(new String[] { String.format("%d", number), id, name, String.format("%d", qty),
-						String.format("%f", getPrice * qty), "Cancel" });
+				dmodel.addRow(new String[] { String.format("%d", ++number), id, name, String.format("%d", qty),
+						String.format("%.2f", getPrice * qty), "Cancel" });
 			}
 			idField.setText("");
 			quantityField.setText("1");
