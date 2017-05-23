@@ -5,8 +5,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -16,34 +14,36 @@ import application.CashierMachine;
 import database.Store;
 
 import javax.swing.JTextField;
-import javax.swing.JList;
+import javax.swing.JToolBar;
 import javax.swing.JTable;
 import java.awt.Font;
-import java.awt.List;
 
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.awt.event.ActionEvent;
 
 public class TerrariumGUI extends JFrame implements Observer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Store store;
 	private JFrame frame;
 	private JTextField idField, quantityField;
-	private List list;
 	private JTable table;
 	private JLabel labelSubtotal;
 	private PaymentGUI paymentGUI;
-	private java.util.List<ProductLine> productLine = new ArrayList<ProductLine>();
+	private List<ProductLine> productLine = new ArrayList<ProductLine>();
 	private CashierMachine cashier;
 	private int number = 0;
+	private JToolBar toolBar;
+	private DefaultTableModel dmodel;
 
 	/**
 	 * Create the application.
@@ -69,12 +69,16 @@ public class TerrariumGUI extends JFrame implements Observer {
 		frame = new JFrame();
 		frame.setTitle("Terrarium");
 		frame.setResizable(false);
-		frame.setBounds(30, 30, 700, 400);
+		frame.setBounds(30, 30, 700, 430);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
+
+		toolBar = new JToolBar();
+		toolBar.add(cancelButton());
+		frame.add(toolBar, BorderLayout.NORTH);
 
 		JLabel lblNewLabel = new JLabel("Product ID :");
 		lblNewLabel.setBounds(41, 27, 74, 16);
@@ -107,8 +111,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 			}
 		});
 
-		String[] COLUMN_NAMES = { "#", "Product ID", "Name", "Quantity", "Total", "Cancel" };
-		DefaultTableModel dmodel = new DefaultTableModel();
+		dmodel = new DefaultTableModel();
 		initTable(dmodel);
 
 		table = new JTable();
@@ -168,11 +171,17 @@ public class TerrariumGUI extends JFrame implements Observer {
 	}
 
 	public void clearAllTable() {
-		table.removeAll();
+		int rowCount = dmodel.getRowCount();
+		for (int i = rowCount - 1; i >= 0; i--) {
+			dmodel.removeRow(i);
+		}
 	}
 
 	private JButton cancelButton() {
-		JButton cancel = new JButton("x");
+		JButton cancel = new JButton("clear all");
+		cancel.addActionListener((e) -> {
+			clearAllTable();
+		});
 		return cancel;
 	}
 
