@@ -44,6 +44,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 	private int number = 0;
 	private JToolBar toolBar;
 	private DefaultTableModel dmodel;
+	private JButton clearAll;
 
 	/**
 	 * Create the application.
@@ -82,6 +83,15 @@ public class TerrariumGUI extends JFrame implements Observer {
 		});
 
 		toolBar = new JToolBar();
+
+		clearAll = new JButton("clear all");
+		clearAll.addActionListener((e) -> {
+			clearAllTable();
+			this.cashier.setSubtotal(0);
+		});
+
+		toolBar = new JToolBar();
+		toolBar.add(clearAll);
 		frame.add(toolBar, BorderLayout.NORTH);
 
 		JLabel lblNewLabel = new JLabel("Product ID :");
@@ -162,6 +172,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 		labelSubtotal.setBounds(213, 301, 239, 77);
 		labelSubtotal.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(labelSubtotal);
+
 	}
 
 	private void initTable(DefaultTableModel dmodel) {
