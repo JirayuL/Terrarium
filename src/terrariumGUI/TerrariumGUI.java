@@ -116,7 +116,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 
 		table = new JTable();
 		table.setModel(dmodel);
-		table.setEnabled(false);
+//		table.setEnabled(false);
 
 		JScrollPane scPane = new JScrollPane(table);
 		scPane.setBounds(41, 60, 609, 222);
@@ -172,6 +172,10 @@ public class TerrariumGUI extends JFrame implements Observer {
 
 	private boolean InMap(String id) {
 		return store.getProductMap().containsKey(id);
+	}
+	
+	public void clearAllTable(){
+		table.removeAll();
 	}
 
 	@Override
