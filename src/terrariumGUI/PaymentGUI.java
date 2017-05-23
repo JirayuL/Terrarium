@@ -234,6 +234,7 @@ public class PaymentGUI implements Observer {
 		btnCancel.setBounds(353, 265, 110, 70);
 		btnCancel.addActionListener((e) -> {
 			close();
+			cashier.setCash(0);
 		});
 		frame.getContentPane().add(btnCancel);
 

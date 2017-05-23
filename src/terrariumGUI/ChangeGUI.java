@@ -58,8 +58,12 @@ public class ChangeGUI {
 		btnEnd.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		btnEnd.setBounds(95, 184, 129, 41);
 		btnEnd.addActionListener((e) -> {
-			close();
+			
 			PaymentGUI.getInstance().close();
+			TerrariumGUI gui = TerrariumGUI.getInstance();
+			gui.clearAllTable();
+			cashier.setSubtotal(0);
+			close();
 		});
 		frame.getContentPane().add(btnEnd);
 	}
