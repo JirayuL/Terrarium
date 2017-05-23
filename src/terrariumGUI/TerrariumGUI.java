@@ -28,9 +28,11 @@ import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 import java.awt.event.ActionEvent;
 
-public class TerrariumGUI extends JFrame {
+public class TerrariumGUI extends JFrame implements Observer{
 
 	private Store store;
 	private JFrame frame;
@@ -157,5 +159,11 @@ public class TerrariumGUI extends JFrame {
 
 	private boolean InMap(String id) {
 		return store.getProductMap().containsKey(id);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }
