@@ -2,14 +2,12 @@ package terrariumGUI;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.table.AbstractTableModel;
 
 import database.Store;
 
-public class ProductTableModel extends AbstractTableModel implements Observer {
+public class ProductTableModel extends AbstractTableModel {
 	private Store store;
 	private String[] COLUMN_NAMES = new String[] { "#", "Product ID", "Name", "Quantity", "Total", "Cancel" };
 	private List<ProductLine> productLine = new ArrayList<ProductLine>();
@@ -53,11 +51,10 @@ public class ProductTableModel extends AbstractTableModel implements Observer {
 			return "";
 		}
 	}
-
+	
 	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-
+	public String getColumnName(int column) {
+		return this.COLUMN_NAMES[column];
 	}
 
 }

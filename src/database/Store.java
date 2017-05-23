@@ -49,7 +49,7 @@ public class Store {
 						new ProductLine(myRs.getInt("product_id"), myRs.getString("name"), myRs.getDouble("price")));
 			}
 		} catch (Exception exc) {
-			exc.printStackTrace();
+			// exc.printStackTrace();
 		} finally {
 			// For check the database in List
 			// for (ProductLine productLine : line) {

@@ -30,10 +30,10 @@ public class CashierMachine extends Observable {
 
 	public void add(double price, int qty) {
 		subtotal += price * qty;
-		calculateVAT();
-		calculateTotal();
-		setChanged();
-		notifyObservers();
+//		calculateVAT();
+//		calculateTotal();
+//		setChanged();
+//		notifyObservers();
 	}
 
 }
