@@ -40,7 +40,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 	private JTable table;
 	private JLabel labelSubtotal;
 	private PaymentGUI paymentGUI;
-//	private List<ProductLine> productLine;
+	// private List<ProductLine> productLine;
 	private Map<Integer, ProductLine> productMap;
 	private CashierMachine cashier;
 	private DefaultTableModel dmodel;
@@ -51,12 +51,13 @@ public class TerrariumGUI extends JFrame implements Observer {
 	 * 
 	 * @throws IOException
 	 */
-	public TerrariumGUI(Store store, CashierMachine cashier) throws IOException {
+	public TerrariumGUI(Store store, CashierMachine cashier, PaymentGUI paymentGUI) throws IOException {
 		this.store = store;
 		this.cashier = cashier;
-//		productLine = new ArrayList<ProductLine>();
+		// productLine = new ArrayList<ProductLine>();
 		productMap = new HashMap<Integer, ProductLine>();
-		paymentGUI = new PaymentGUI();
+		paymentGUI = new PaymentGUI(cashier);
+		this.paymentGUI = paymentGUI;
 		initComponents();
 	}
 
@@ -110,7 +111,6 @@ public class TerrariumGUI extends JFrame implements Observer {
 			}
 		});
 
-		String[] COLUMN_NAMES = { "#", "Product ID", "Name", "Quantity", "Total", "Cancel" };
 		dmodel = new DefaultTableModel();
 		initTable(dmodel);
 
@@ -131,7 +131,6 @@ public class TerrariumGUI extends JFrame implements Observer {
 		JButton btnCheckout = new JButton("Check Out");
 		btnCheckout.setFont(new Font("Lucida Grande", Font.PLAIN, 23));
 		btnCheckout.addActionListener((e) -> {
-			System.out.println("eiei");
 			paymentGUI.run();
 		});
 		btnCheckout.setBounds(506, 294, 144, 78);
@@ -145,12 +144,12 @@ public class TerrariumGUI extends JFrame implements Observer {
 				int qty = Integer.parseInt(quantityField.getText());
 				double getPrice = Double.parseDouble(store.getProductMap().get(id).get(1));
 				String name = store.getProductMap().get(id).get(0);
-//				productLine.add(new ProductLine(Integer.parseInt(id), name, getPrice));
+				// productLine.add(new ProductLine(Integer.parseInt(id), name,
+				// getPrice));
 				productMap.put(number, new ProductLine(Integer.parseInt(id), name, getPrice));
 				cashier.add(getPrice, qty);
 				dmodel.addRow(new String[] { String.format("%d", number), id, name, String.format("%d", qty),
-						String.format("%.2f", getPrice * qty)});
-				table.add(cancelButton());
+						String.format("%.2f", getPrice * qty) });
 			}
 			idField.setText("");
 			quantityField.setText("1");
@@ -158,7 +157,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 		btnAdd.setBounds(533, 22, 117, 29);
 		panel.add(btnAdd);
 
-		labelSubtotal = new JLabel("");
+		labelSubtotal = new JLabel("0.00");
 		labelSubtotal.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
 		labelSubtotal.setBounds(213, 301, 239, 77);
 		labelSubtotal.setHorizontalAlignment(SwingConstants.CENTER);
@@ -173,15 +172,6 @@ public class TerrariumGUI extends JFrame implements Observer {
 
 	private boolean InMap(String id) {
 		return store.getProductMap().containsKey(id);
-	}
-
-	private JButton cancelButton() {
-		JButton cancel = new JButton("x");
-		cancel.addActionListener((e) -> {
-//			dmodel.;
-		});
-		
-		return cancel;
 	}
 
 	@Override
