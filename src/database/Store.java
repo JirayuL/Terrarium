@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
-import terrariumGUI.ProductLine;
+import application.ProductLine;
 
 public class Store {
 	private static Store store = null;

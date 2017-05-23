@@ -1,4 +1,4 @@
-package terrariumGUI;
+package application;
 
 public class ProductLine implements Comparable<ProductLine> {
 	private int id;
