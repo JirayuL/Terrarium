@@ -50,7 +50,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 	 * 
 	 * @throws IOException
 	 */
-	public TerrariumGUI(Store store, CashierMachine cashier, PaymentGUI paymentGUI) throws IOException {
+	public TerrariumGUI(Store store, CashierMachine cashier, PaymentGUI paymentGUI) {
 		this.store = store;
 		this.cashier = cashier;
 		this.paymentGUI = paymentGUI;

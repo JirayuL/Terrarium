@@ -39,9 +39,13 @@ public class PaymentGUI implements Observer {
 	 * @param cashier
 	 * @throws IOException
 	 */
-	public PaymentGUI(CashierMachine cashier) throws IOException {
+	public PaymentGUI(CashierMachine cashier) {
 		this.cashier = cashier;
-		initialize();
+		try {
+			initialize();
+		} catch (IOException e) {
+
+		}
 	}
 
 	/**
@@ -196,7 +200,7 @@ public class PaymentGUI implements Observer {
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				
+
 			}
 
 		});
