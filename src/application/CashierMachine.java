@@ -27,6 +27,14 @@ public class CashierMachine extends Observable {
 		return subtotal;
 	}
 	
+	public void subtractSubtotal(double money) {
+		this.subtotal -= money;
+		calculateVAT();
+		calculateTotal();
+		setChanged();
+		notifyObservers();
+	}
+
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
 		calculateVAT();
@@ -39,11 +47,9 @@ public class CashierMachine extends Observable {
 		return total;
 	}
 
-
 	public double getVat() {
 		return vat;
 	}
-
 
 	public double getCash() {
 		return cash;
@@ -54,7 +60,7 @@ public class CashierMachine extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	public void addCash(double cash) {
 		this.cash += cash;
 		setChanged();

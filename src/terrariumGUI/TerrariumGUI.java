@@ -9,9 +9,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import application.CashierMachine;
+import application.ProductLine;
 import database.Store;
 
 import javax.swing.JTextField;
@@ -19,7 +23,10 @@ import javax.swing.JToolBar;
 import javax.swing.JTable;
 import java.awt.Font;
 
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
+
+import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
@@ -27,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Vector;
 
 public class TerrariumGUI extends JFrame implements Observer {
 
@@ -46,6 +54,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 	private JToolBar toolBar;
 	private DefaultTableModel dmodel;
 	private JButton clearAll;
+	private JButton deleteSelected;
 
 	/**
 	 * Create the application.
@@ -77,16 +86,6 @@ public class TerrariumGUI extends JFrame implements Observer {
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-		
-		clearAll = new JButton("clear all");
-		clearAll.addActionListener((e) -> {
-			clearAllTable();
-			this.cashier.setSubtotal(0);
-		});
-		
-		toolBar = new JToolBar();
-		toolBar.add(clearAll);
-		frame.add(toolBar, BorderLayout.NORTH);
 
 		JLabel lblNewLabel = new JLabel("Product ID :");
 		lblNewLabel.setBounds(41, 27, 74, 16);
@@ -161,7 +160,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 				productLine.add(new ProductLine(Integer.parseInt(id), name, getPrice));
 				cashier.add(getPrice, qty);
 				dmodel.addRow(new String[] { String.format("%d", ++number), id, name, String.format("%d", qty),
-						String.format("%.2f", getPrice * qty), "Cancel" });
+						String.format("%.2f", getPrice * qty) });
 			}
 			idField.setText("");
 			quantityField.setText("1");
@@ -174,11 +173,25 @@ public class TerrariumGUI extends JFrame implements Observer {
 		labelSubtotal.setBounds(213, 301, 239, 77);
 		labelSubtotal.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(labelSubtotal);
-		
+
+		deleteSelected = new JButton("Delete selected rows");
+		deleteSelected.addActionListener(new DeleteRowFromTableAction(table, dmodel));
+
+		clearAll = new JButton("Clear all");
+		clearAll.addActionListener((e) -> {
+			clearAllTable();
+			this.cashier.setSubtotal(0);
+		});
+
+		toolBar = new JToolBar();
+		toolBar.add(clearAll);
+		toolBar.add(deleteSelected);
+		frame.add(toolBar, BorderLayout.NORTH);
+
 	}
 
 	private void initTable(DefaultTableModel dmodel) {
-		String[] COLUMN_NAMES = new String[] { "#", "Product ID", "Name", "Quantity", "Total", "Cancel" };
+		String[] COLUMN_NAMES = new String[] { "#", "Product ID", "Name", "Quantity", "Total" };
 		for (String string : COLUMN_NAMES)
 			dmodel.addColumn(string);
 	}
@@ -194,14 +207,6 @@ public class TerrariumGUI extends JFrame implements Observer {
 		}
 	}
 
-	private JButton clearAllButton() {
-		JButton clearAll = new JButton("clear all");
-		clearAll.addActionListener((e) -> {
-			clearAllTable();
-		});
-		return clearAll;
-	}
-
 	@Override
 	public void update(Observable subject, Object info) {
 		if (info != null)
@@ -211,5 +216,63 @@ public class TerrariumGUI extends JFrame implements Observer {
 			labelSubtotal.setText(String.format("%.2f", cashierMachine.getSubtotal()));
 			// labelSubtotal.setHorizontalAlignment(SwingConstants.RIGHT);
 		}
+	}
+
+	public abstract class AbstractTableAction<T extends JTable, M extends TableModel> extends AbstractAction {
+
+		private T table;
+		private M model;
+
+		public AbstractTableAction(T table, M model) {
+			this.table = table;
+			this.model = model;
+		}
+
+		public T getTable() {
+			return table;
+		}
+
+		public M getModel() {
+			return model;
+		}
+
+	}
+
+	public class DeleteRowFromTableAction extends AbstractTableAction<JTable, DefaultTableModel> {
+
+		public DeleteRowFromTableAction(JTable table, DefaultTableModel model) {
+			super(table, model);
+			putValue(NAME, "Delete selected rows");
+			putValue(SHORT_DESCRIPTION, "Delete selected rows");
+			table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+				@Override
+				public void valueChanged(ListSelectionEvent e) {
+					setEnabled(getTable().getSelectedRowCount() > 0);
+				}
+			});
+			setEnabled(getTable().getSelectedRowCount() > 0);
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JTable table = getTable();
+			if (table.getSelectedRowCount() > 0) {
+				List<Vector> selectedRows = new ArrayList<>(25);
+				DefaultTableModel model = getModel();
+				Vector rowData = model.getDataVector();
+				for (int row : table.getSelectedRows()) {
+					int modelRow = table.convertRowIndexToModel(row);
+					Vector rowValue = (Vector) rowData.get(modelRow);
+					selectedRows.add(rowValue);
+				}
+
+				for (Vector rowValue : selectedRows) {
+					int rowIndex = rowData.indexOf(rowValue);
+					cashier.subtractSubtotal(Double.parseDouble(model.getValueAt(rowIndex, 4)+""));
+					model.removeRow(rowIndex);
+				}
+			}
+		}
+
 	}
 }
