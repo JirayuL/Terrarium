@@ -60,8 +60,7 @@ public class ChangeGUI {
 		btnEnd.addActionListener((e) -> {
 
 			PaymentGUI.getInstance().close();
-			TerrariumGUI gui = TerrariumGUI.getInstance();
-			gui.clearAllTable();
+			TerrariumGUI.getInstance().clearAllTable();
 			cashier.setSubtotal(0);
 			close();
 		});

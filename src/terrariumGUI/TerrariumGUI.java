@@ -205,7 +205,6 @@ public class TerrariumGUI extends JFrame implements Observer {
 	}
 
 	public void clearAllTable() {
-		System.out.println();
 		int rowCount = dmodel.getRowCount();
 		for (int i = rowCount - 1; i >= 0; i--) {
 			dmodel.removeRow(i);
