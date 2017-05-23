@@ -9,15 +9,20 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import application.CashierMachine;
 import database.Store;
+import terrariumGUI.PaymentGUI;
 import terrariumGUI.TerrariumGUI;
 
 public class Main {
 	public static void main(String[] args) throws SQLException, IOException {
 
 		Store store = Store.getInstance();
-
-		TerrariumGUI ui = new TerrariumGUI(store);
-		ui.run();
+		CashierMachine cashier = new CashierMachine();
+		TerrariumGUI terrariumGUI = new TerrariumGUI(store,cashier);
+		PaymentGUI paymentGUI = new PaymentGUI();
+		cashier.addObserver(terrariumGUI);
+		cashier.addObserver(paymentGUI);
+		terrariumGUI.run();
 	}
 }

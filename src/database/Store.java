@@ -18,7 +18,6 @@ import terrariumGUI.ProductLine;
 
 public class Store {
 	private static Store store = null;
-	HashMap<String, List<String>> myMap;
 	List<ProductLine> productLine = new ArrayList<>();
 	Map<String, List<String>> productMap = new HashMap<>();
 
@@ -43,6 +42,7 @@ public class Store {
 				 System.out.println(
 				 myRs.getString("product_id") + ", " + myRs.getString("name")
 				 + ", " + myRs.getString("price"));
+
 				 productMap.put(myRs.getString("product_id"), new ArrayList<String>(Arrays.asList(myRs.getString("name"), myRs.getString("price"))));
 				productLine.add(
 						new ProductLine(myRs.getInt("product_id"), myRs.getString("name"), myRs.getDouble("price")));
