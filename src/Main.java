@@ -11,7 +11,7 @@ public class Main {
 		Store store = Store.getInstance();
 		CashierMachine cashier = CashierMachine.getInstance();
 		PaymentGUI paymentGUI = PaymentGUI.getInstance();
-		TerrariumGUI terrariumGUI = new TerrariumGUI();
+		TerrariumGUI terrariumGUI = TerrariumGUI.getInstance();
 		cashier.addObserver(terrariumGUI);
 		cashier.addObserver(paymentGUI);
 		EventQueue.invokeLater(new Runnable() {
