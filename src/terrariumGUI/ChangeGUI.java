@@ -6,20 +6,31 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import application.CashierMachine;
+
 import java.awt.Font;
 import javax.swing.JButton;
 
 public class ChangeGUI {
-
+	private CashierMachine cashier;
 	private JFrame frame;
 	private JLabel lblChange, lblShowChange;
 	private JButton btnEnd;
+	private static ChangeGUI instance;
 
 	/**
 	 * Create the application.
+	 * @param cashier 
+	 * @param runnable 
 	 */
 	public ChangeGUI() {
+		this.cashier = CashierMachine.getInstance();
 		initialize();
+	}
+	
+	public static ChangeGUI getInstance(){
+		if(instance == null ) instance = new ChangeGUI();
+		return instance;
 	}
 
 	/**
@@ -37,7 +48,7 @@ public class ChangeGUI {
 		lblChange.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(lblChange);
 		
-		lblShowChange = new JLabel("0.00");
+		lblShowChange = new JLabel(String.format("%.2f", cashier.getChange()));
 		lblShowChange.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
 		lblShowChange.setBounds(60, 110, 210, 48);
 		lblShowChange.setHorizontalAlignment(SwingConstants.CENTER);
@@ -48,6 +59,7 @@ public class ChangeGUI {
 		btnEnd.setBounds(95, 184, 129, 41);
 		btnEnd.addActionListener((e) -> {
 			close();
+			PaymentGUI.getInstance().close();
 		});
 		frame.getContentPane().add(btnEnd);
 	}

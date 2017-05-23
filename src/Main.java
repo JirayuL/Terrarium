@@ -9,9 +9,9 @@ import terrariumGUI.TerrariumGUI;
 public class Main {
 	public static void main(String[] args) {
 		Store store = Store.getInstance();
-		CashierMachine cashier = new CashierMachine();
-		PaymentGUI paymentGUI = new PaymentGUI(cashier);
-		TerrariumGUI terrariumGUI = new TerrariumGUI(store, cashier, paymentGUI);
+		CashierMachine cashier = CashierMachine.getInstance();
+		PaymentGUI paymentGUI = PaymentGUI.getInstance();
+		TerrariumGUI terrariumGUI = new TerrariumGUI();
 		cashier.addObserver(terrariumGUI);
 		cashier.addObserver(paymentGUI);
 		EventQueue.invokeLater(new Runnable() {
