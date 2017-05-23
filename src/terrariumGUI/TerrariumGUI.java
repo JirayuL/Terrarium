@@ -76,8 +76,12 @@ public class TerrariumGUI extends JFrame implements Observer {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
+		JButton deleteSelected = new JButton("Delete selected rows");
+		deleteSelected.addActionListener((e) -> {
+
+		});
+
 		toolBar = new JToolBar();
-		toolBar.add(clearAllButton());
 		frame.add(toolBar, BorderLayout.NORTH);
 
 		JLabel lblNewLabel = new JLabel("Product ID :");
@@ -175,14 +179,6 @@ public class TerrariumGUI extends JFrame implements Observer {
 		for (int i = rowCount - 1; i >= 0; i--) {
 			dmodel.removeRow(i);
 		}
-	}
-
-	private JButton clearAllButton() {
-		JButton clearAll = new JButton("clear all");
-		clearAll.addActionListener((e) -> {
-			clearAllTable();
-		});
-		return clearAll;
 	}
 
 	@Override
