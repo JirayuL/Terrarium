@@ -29,8 +29,9 @@ public class Store {
 
 		try {
 			// 1. Get a connection to database
-			myConn = DriverManager.getConnection("jdbc:mysql://158.108.137.58:3306/Terrarium", "root", "1234");
-
+//			myConn = DriverManager.getConnection("jdbc:mysql://158.108.137.58:3306/Terrarium", "root", "1234");
+			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Terrarium", "", "");
+			
 			// 2. Create a statement
 			myStmt = myConn.createStatement();
 
