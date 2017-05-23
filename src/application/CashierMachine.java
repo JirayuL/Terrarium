@@ -26,6 +26,14 @@ public class CashierMachine extends Observable {
 	public double getSubtotal() {
 		return subtotal;
 	}
+	
+	public void setSubtotal(double subtotal) {
+		this.subtotal = subtotal;
+		calculateVAT();
+		calculateTotal();
+		setChanged();
+		notifyObservers();
+	}
 
 	public double getTotal() {
 		return total;
