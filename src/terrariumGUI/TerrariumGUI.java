@@ -77,7 +77,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 		panel.setLayout(null);
 
 		toolBar = new JToolBar();
-		toolBar.add(cancelButton());
+		toolBar.add(clearAllButton());
 		frame.add(toolBar, BorderLayout.NORTH);
 
 		JLabel lblNewLabel = new JLabel("Product ID :");
@@ -177,12 +177,12 @@ public class TerrariumGUI extends JFrame implements Observer {
 		}
 	}
 
-	private JButton cancelButton() {
-		JButton cancel = new JButton("clear all");
-		cancel.addActionListener((e) -> {
+	private JButton clearAllButton() {
+		JButton clearAll = new JButton("clear all");
+		clearAll.addActionListener((e) -> {
 			clearAllTable();
 		});
-		return cancel;
+		return clearAll;
 	}
 
 	@Override
