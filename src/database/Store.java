@@ -7,11 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 import application.ProductLine;
@@ -29,7 +26,7 @@ public class Store {
 		try {
 			// 1. Get a connection to database
 			myConn = DriverManager.getConnection("jdbc:mysql://158.108.141.127:3306/Terrarium", "root", "1234");
-			
+
 			// 2. Create a statement
 			myStmt = myConn.createStatement();
 
@@ -39,16 +36,16 @@ public class Store {
 			// 4. Process the result set
 			while (myRs.next()) {
 				// For check data in the database
-				 System.out.println(
-				 myRs.getString("product_id") + ", " + myRs.getString("name")
-				 + ", " + myRs.getString("price"));
+				System.out.println(
+						myRs.getString("product_id") + ", " + myRs.getString("name") + ", " + myRs.getString("price"));
 
-				 productMap.put(myRs.getString("product_id"), new ArrayList<String>(Arrays.asList(myRs.getString("name"), myRs.getString("price"))));
+				productMap.put(myRs.getString("product_id"),
+						new ArrayList<String>(Arrays.asList(myRs.getString("name"), myRs.getString("price"))));
 				productLine.add(
 						new ProductLine(myRs.getInt("product_id"), myRs.getString("name"), myRs.getDouble("price")));
 			}
 		} catch (Exception exc) {
-			 exc.printStackTrace();
+			exc.printStackTrace();
 		} finally {
 			// For check the database in List
 			// for (ProductLine productLine : line) {
