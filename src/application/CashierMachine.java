@@ -24,16 +24,38 @@ public class CashierMachine extends Observable {
 		vat = subtotal * VAT;
 	}
 
+	public double getSubtotal() {
+		return subtotal;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+
+	public double getVat() {
+		return vat;
+	}
+
+
+	public double getCash() {
+		return cash;
+	}
+
+	public void setCash(double cash) {
+		this.cash = cash;
+	}
+
 	private void calculateTotal() {
 		total = subtotal + VAT;
 	}
 
 	public void add(double price, int qty) {
 		subtotal += price * qty;
-//		calculateVAT();
-//		calculateTotal();
-//		setChanged();
-//		notifyObservers();
+		calculateVAT();
+		calculateTotal();
+		setChanged();
+		notifyObservers();
 	}
 
 }

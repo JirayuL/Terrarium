@@ -29,7 +29,6 @@ public class Store {
 		try {
 			// 1. Get a connection to database
 			myConn = DriverManager.getConnection("jdbc:mysql://158.108.141.127:3306/Terrarium", "root", "1234");
-//			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Terrarium", "", "");
 			
 			// 2. Create a statement
 			myStmt = myConn.createStatement();
@@ -43,10 +42,10 @@ public class Store {
 				 System.out.println(
 				 myRs.getString("product_id") + ", " + myRs.getString("name")
 				 + ", " + myRs.getString("price"));
-				 productMap.put(myRs.getString("product_id"),
-						new ArrayList<String>(Arrays.asList(myRs.getString("name"), myRs.getString("price"))));
-//				productLine.add(
-//						new ProductLine(myRs.getInt("product_id"), myRs.getString("name"), myRs.getDouble("price")));
+
+				 productMap.put(myRs.getString("product_id"), new ArrayList<String>(Arrays.asList(myRs.getString("name"), myRs.getString("price"))));
+				productLine.add(
+						new ProductLine(myRs.getInt("product_id"), myRs.getString("name"), myRs.getDouble("price")));
 			}
 		} catch (Exception exc) {
 			 exc.printStackTrace();

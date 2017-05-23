@@ -39,7 +39,7 @@ public class PaymentGUI implements Observer{
 	 */
 	private void initialize() throws IOException {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 680, 370);
+		frame.setBounds(700, 30, 680, 370);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		

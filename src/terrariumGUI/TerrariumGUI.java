@@ -36,13 +36,13 @@ public class TerrariumGUI extends JFrame implements Observer{
 
 	private Store store;
 	private JFrame frame;
-	private JTextField idField;
-	private JTextField quantityField;
+	private JTextField idField,quantityField;
 	private List list;
 	private JTable table;
+	private JLabel labelSubtotal;
 	private PaymentGUI paymentGUI;
 	private java.util.List<ProductLine> productLine = new ArrayList<ProductLine>();
-	private CashierMachine cashier = new CashierMachine();
+	private CashierMachine cashier;
 	private int number = 0;
 
 	/**
@@ -50,8 +50,9 @@ public class TerrariumGUI extends JFrame implements Observer{
 	 * 
 	 * @throws IOException
 	 */
-	public TerrariumGUI(Store store) throws IOException {
+	public TerrariumGUI(Store store,CashierMachine cashier) throws IOException {
 		this.store = store;
+		this.cashier = cashier;
 		paymentGUI = new PaymentGUI();
 		initComponents();
 	}
@@ -68,7 +69,7 @@ public class TerrariumGUI extends JFrame implements Observer{
 		frame = new JFrame();
 		frame.setTitle("Terrarium");
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 700, 400);
+		frame.setBounds(30, 30, 700, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel();
@@ -118,9 +119,9 @@ public class TerrariumGUI extends JFrame implements Observer{
 		panel.add(scPane);
 
 		JLabel lblNewLabel_1 = new JLabel("TOTAL");
-		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(41, 306, 159, 65);
+		lblNewLabel_1.setBounds(42, 301, 159, 77);
 		panel.add(lblNewLabel_1);
 
 		JButton btnCheckout = new JButton("Check Out");
@@ -141,14 +142,20 @@ public class TerrariumGUI extends JFrame implements Observer{
 				String name = store.getProductMap().get(id).get(0);
 				productLine.add(new ProductLine(Integer.parseInt(id), name, getPrice));
 				cashier.add(getPrice, qty);
-				dmodel.addRow(new String[] { String.format("%d", number), id, name, String.format("%d", qty),
-						String.format("%f", getPrice * qty), "Cancel" });
+				dmodel.addRow(new String[] { String.format("%d", ++number), id, name, String.format("%d", qty),
+						String.format("%.2f", getPrice * qty), "Cancel" });
 			}
 			idField.setText("");
 			quantityField.setText("1");
 		});
 		btnAdd.setBounds(533, 22, 117, 29);
 		panel.add(btnAdd);
+		
+		labelSubtotal = new JLabel("");
+		labelSubtotal.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
+		labelSubtotal.setBounds(213, 301, 239, 77);
+		labelSubtotal.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(labelSubtotal);
 	}
 
 	private void initTable(DefaultTableModel dmodel) {
@@ -162,8 +169,12 @@ public class TerrariumGUI extends JFrame implements Observer{
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+	public void update(Observable subject, Object info) {
+		if (info != null) System.out.println(info);
+        if (subject instanceof CashierMachine) {
+        	CashierMachine cashierMachine = (CashierMachine) subject;
+        	labelSubtotal.setText(String.format("%.2f", cashierMachine.getSubtotal()));
+//        	labelSubtotal.setHorizontalAlignment(SwingConstants.RIGHT);
+        }
 	}
 }
