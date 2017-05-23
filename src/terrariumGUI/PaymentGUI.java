@@ -32,6 +32,7 @@ public class PaymentGUI implements Observer {
 	private JLabel lblSubTotal, lblVat, lblTotal, lblCash, lblShowSubTotal, lblShowVAT, lblShowTotal;
 	private double oneBaht = 1, twoBaht = 2, fiveBaht = 5, tenBaht = 10, twentyBaht = 20, fiftyBaht = 50,
 			hundredBaht = 100, fivehundredBaht = 500, thousandBaht = 1000;
+	private JButton btnCancel;
 
 	/**
 	 * Create the application.
@@ -71,8 +72,8 @@ public class PaymentGUI implements Observer {
 
 		button2Baht = new JButton();
 		button2Baht.setBounds(97, 10, 75, 70);
-		Image img2Baht = ImageIO.read(getClass().getResource("/image/2coin.png"));
-		Image resize2Baht = img2Baht.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+		img2Baht = ImageIO.read(getClass().getResource("/image/2coin.png"));
+		resize2Baht = img2Baht.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
 		button2Baht.setIcon(new ImageIcon(resize2Baht));
 		button2Baht.addActionListener((e) -> {
 			this.cashier.addCash(twoBaht);
@@ -208,16 +209,37 @@ public class PaymentGUI implements Observer {
 
 		btnEnter = new JButton("Enter");
 		btnEnter.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		btnEnter.setBounds(415, 265, 181, 70);
+		btnEnter.setBounds(482, 265, 180, 70);
 		btnEnter.addActionListener((e) -> {
-			frame.setVisible(false);
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						ChangeGUI changeGUI = new ChangeGUI();
+						changeGUI.run();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
 		});
 		frame.getContentPane().add(btnEnter);
+		
+		btnCancel = new JButton("Cancel");
+		btnCancel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		btnCancel.setBounds(353, 265, 110, 70);
+		btnCancel.addActionListener((e) -> {
+			close();
+		});
+		frame.getContentPane().add(btnCancel);
 
 	}
 
 	public void run() {
 		frame.setVisible(true);
+	}
+	
+	public void close() {
+		frame.setVisible(false);
 	}
 
 	@Override

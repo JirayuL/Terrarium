@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -137,7 +138,15 @@ public class TerrariumGUI extends JFrame implements Observer {
 		JButton btnCheckout = new JButton("Check Out");
 		btnCheckout.setFont(new Font("Lucida Grande", Font.PLAIN, 23));
 		btnCheckout.addActionListener((e) -> {
-			paymentGUI.run();
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						paymentGUI.run();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
 		});
 		btnCheckout.setBounds(506, 294, 144, 78);
 		panel.add(btnCheckout);
