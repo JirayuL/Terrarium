@@ -5,18 +5,15 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
 import database.Store;
 
-public class ProductTableModel extends AbstractTableModel implements Observer {
+public class ProductTableModel extends AbstractTableModel {
 	private Store store;
-	private String[] COLUMN_NAMES = new String[] { "#", "Product ID", "Name", "Quantity", "Total", "Cancel" };
+	private String[] COLUMN_NAMES = new String[] { "Product ID", "Name", "Quantity", "Total", "Cancel" };
 	private List<ProductLine> productLine = new ArrayList<ProductLine>();
-
-	public ProductTableModel(List<ProductLine> productLines) {
-		this.productLine = productLines;
-	}
 
 	@Override
 	public int getRowCount() {
@@ -26,6 +23,34 @@ public class ProductTableModel extends AbstractTableModel implements Observer {
 	@Override
 	public int getColumnCount() {
 		return this.COLUMN_NAMES.length;
+	}
+
+	@Override
+	public String getColumnName(int column) {
+		return COLUMN_NAMES[column];
+	}
+
+	@Override
+	public Class<?> getColumnClass(int columnIndex) {
+		switch (columnIndex) {
+		case 0: {
+			return String.class;
+		}
+		case 1: {
+			return String.class;
+		}
+		case 2: {
+			return Integer.class;
+		}
+		case 3: {
+			return Double.class;
+		}
+		case 4: {
+			return JButton.class;
+		}
+		default:
+			return String.class;
+		}
 	}
 
 	@Override
@@ -39,13 +64,13 @@ public class ProductTableModel extends AbstractTableModel implements Observer {
 		ProductLine line = this.productLine.get(rowIndex);
 		switch (columnIndex) {
 		case 0: {
-			// return line.getUser();
-		}
-		case 1: {
 			return line.getId();
 		}
-		case 2: {
+		case 1: {
 			return line.getName();
+		}
+		case 2: {
+			return line.getPrice();
 		}
 		case 3:
 			return line.getPrice();
@@ -54,10 +79,5 @@ public class ProductTableModel extends AbstractTableModel implements Observer {
 		}
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

@@ -2,11 +2,15 @@ package terrariumGUI;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 import application.CashierMachine;
 import database.Store;
@@ -35,6 +39,7 @@ public class TerrariumGUI extends JFrame {
 	private PaymentGUI paymentGUI;
 	private java.util.List<ProductLine> productLine = new ArrayList<ProductLine>();
 	private CashierMachine cashier = new CashierMachine();
+	private int number = 0;
 
 	/**
 	 * Create the application.
@@ -85,9 +90,16 @@ public class TerrariumGUI extends JFrame {
 		panel.add(quantityField);
 		quantityField.setColumns(10);
 
-		list = new List();
-		list.setBounds(41, 60, 609, 222);
-		panel.add(list);
+		String[] COLUMN_NAMES = { "#", "Product ID", "Name", "Quantity", "Total", "Cancel" };
+		DefaultTableModel dmodel = new DefaultTableModel();
+		initTable(dmodel);
+
+		table = new JTable();
+		table.setModel(dmodel);
+
+		JScrollPane scPane = new JScrollPane(table);
+		scPane.setBounds(41, 60, 609, 222);
+		panel.add(scPane);
 
 		JLabel lblNewLabel_1 = new JLabel("TOTAL");
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
@@ -113,12 +125,20 @@ public class TerrariumGUI extends JFrame {
 				String name = store.getProductMap().get(id).get(0);
 				productLine.add(new ProductLine(Integer.parseInt(id), name, getPrice));
 				cashier.add(getPrice, qty);
+				dmodel.addRow(new String[] { String.format("%d", number), id, name, String.format("%d", qty),
+						String.format("%f", getPrice * qty), "Cancel" });
 			}
 			idField.setText("");
 			quantityField.setText("");
 		});
 		btnAdd.setBounds(533, 22, 117, 29);
 		panel.add(btnAdd);
+	}
+
+	private void initTable(DefaultTableModel dmodel) {
+		String[] COLUMN_NAMES = new String[] { "#", "Product ID", "Name", "Quantity", "Total", "Cancel" };
+		for (String string : COLUMN_NAMES)
+			dmodel.addColumn(string);
 	}
 
 	private boolean InMap(String id) {
