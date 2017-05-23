@@ -158,4 +158,9 @@ public class TerrariumGUI extends JFrame {
 	private boolean InMap(String id) {
 		return store.getProductMap().containsKey(id);
 	}
+	
+	private JButton cancelButton(){
+		JButton cancel = new JButton("x");
+		return cancel;
+	}
 }
