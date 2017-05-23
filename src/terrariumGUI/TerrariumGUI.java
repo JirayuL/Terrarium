@@ -259,6 +259,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 
 				for (Vector rowValue : selectedRows) {
 					int rowIndex = rowData.indexOf(rowValue);
+					System.out.println(model.getValueAt(rowIndex, 4));
 					model.removeRow(rowIndex);
 				}
 			}
