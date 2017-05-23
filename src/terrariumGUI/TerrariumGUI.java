@@ -50,10 +50,10 @@ public class TerrariumGUI extends JFrame implements Observer {
 	 * 
 	 * @throws IOException
 	 */
-	public TerrariumGUI(Store store, CashierMachine cashier) throws IOException {
+	public TerrariumGUI(Store store, CashierMachine cashier,PaymentGUI paymentGUI) throws IOException {
 		this.store = store;
 		this.cashier = cashier;
-		paymentGUI = new PaymentGUI();
+		this.paymentGUI = paymentGUI;
 		initComponents();
 	}
 
@@ -127,7 +127,6 @@ public class TerrariumGUI extends JFrame implements Observer {
 		JButton btnCheckout = new JButton("Check Out");
 		btnCheckout.setFont(new Font("Lucida Grande", Font.PLAIN, 23));
 		btnCheckout.addActionListener((e) -> {
-			System.out.println("eiei");
 			paymentGUI.run();
 		});
 		btnCheckout.setBounds(506, 294, 144, 78);
@@ -151,7 +150,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 		btnAdd.setBounds(533, 22, 117, 29);
 		panel.add(btnAdd);
 
-		labelSubtotal = new JLabel("");
+		labelSubtotal = new JLabel("0.00");
 		labelSubtotal.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
 		labelSubtotal.setBounds(213, 301, 239, 77);
 		labelSubtotal.setHorizontalAlignment(SwingConstants.CENTER);

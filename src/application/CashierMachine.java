@@ -1,10 +1,9 @@
 package application;
 
-import java.util.List;
 import java.util.Observable;
 
 public class CashierMachine extends Observable {
-	private final double VAT = 0.007;
+	private final double VAT = 0.07;
 	private double subtotal;
 	private double total;
 	private double vat;
@@ -44,10 +43,18 @@ public class CashierMachine extends Observable {
 
 	public void setCash(double cash) {
 		this.cash = cash;
+		setChanged();
+		notifyObservers();
+	}
+	
+	public void addCash(double cash) {
+		this.cash += cash;
+		setChanged();
+		notifyObservers();
 	}
 
 	private void calculateTotal() {
-		total = subtotal + VAT;
+		total = subtotal + vat;
 	}
 
 	public void add(double price, int qty) {
