@@ -19,7 +19,6 @@ import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.JTable;
 import java.awt.Font;
-import java.awt.List;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -27,6 +26,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -37,12 +37,13 @@ public class TerrariumGUI extends JFrame implements Observer {
 	private Store store;
 	private JFrame frame;
 	private JTextField idField, quantityField;
-	private List list;
 	private JTable table;
 	private JLabel labelSubtotal;
 	private PaymentGUI paymentGUI;
-	private java.util.List<ProductLine> productLine = new ArrayList<ProductLine>();
+//	private List<ProductLine> productLine;
+	private Map<Integer, ProductLine> productMap;
 	private CashierMachine cashier;
+	private DefaultTableModel dmodel;
 	private int number = 0;
 
 	/**
@@ -53,6 +54,8 @@ public class TerrariumGUI extends JFrame implements Observer {
 	public TerrariumGUI(Store store, CashierMachine cashier) throws IOException {
 		this.store = store;
 		this.cashier = cashier;
+//		productLine = new ArrayList<ProductLine>();
+		productMap = new HashMap<Integer, ProductLine>();
 		paymentGUI = new PaymentGUI();
 		initComponents();
 	}
@@ -108,11 +111,12 @@ public class TerrariumGUI extends JFrame implements Observer {
 		});
 
 		String[] COLUMN_NAMES = { "#", "Product ID", "Name", "Quantity", "Total", "Cancel" };
-		DefaultTableModel dmodel = new DefaultTableModel();
+		dmodel = new DefaultTableModel();
 		initTable(dmodel);
 
 		table = new JTable();
 		table.setModel(dmodel);
+		table.setEnabled(false);
 
 		JScrollPane scPane = new JScrollPane(table);
 		scPane.setBounds(41, 60, 609, 222);
@@ -137,13 +141,16 @@ public class TerrariumGUI extends JFrame implements Observer {
 		btnAdd.addActionListener((e) -> {
 			String id = idField.getText();
 			if (InMap(id) && quantityField != null) {
+				number += 1;
 				int qty = Integer.parseInt(quantityField.getText());
 				double getPrice = Double.parseDouble(store.getProductMap().get(id).get(1));
 				String name = store.getProductMap().get(id).get(0);
-				productLine.add(new ProductLine(Integer.parseInt(id), name, getPrice));
+//				productLine.add(new ProductLine(Integer.parseInt(id), name, getPrice));
+				productMap.put(number, new ProductLine(Integer.parseInt(id), name, getPrice));
 				cashier.add(getPrice, qty);
-				dmodel.addRow(new String[] { String.format("%d", ++number), id, name, String.format("%d", qty),
-						String.format("%.2f", getPrice * qty), "Cancel" });
+				dmodel.addRow(new String[] { String.format("%d", number), id, name, String.format("%d", qty),
+						String.format("%.2f", getPrice * qty)});
+				table.add(cancelButton());
 			}
 			idField.setText("");
 			quantityField.setText("1");
@@ -159,7 +166,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 	}
 
 	private void initTable(DefaultTableModel dmodel) {
-		String[] COLUMN_NAMES = new String[] { "#", "Product ID", "Name", "Quantity", "Total", "Cancel" };
+		String[] COLUMN_NAMES = new String[] { "#", "Product ID", "Name", "Quantity", "Total" };
 		for (String string : COLUMN_NAMES)
 			dmodel.addColumn(string);
 	}
@@ -170,6 +177,10 @@ public class TerrariumGUI extends JFrame implements Observer {
 
 	private JButton cancelButton() {
 		JButton cancel = new JButton("x");
+		cancel.addActionListener((e) -> {
+//			dmodel.;
+		});
+		
 		return cancel;
 	}
 
