@@ -11,6 +11,7 @@ import javax.swing.JButton;
 
 /**
  * ChangeGUI is a GUI of show a change to return customer
+ * 
  * @author Wanchanapon Thanwaranurak
  * @version 14.5.17
  */

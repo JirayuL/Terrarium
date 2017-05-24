@@ -22,6 +22,7 @@ import application.CashierMachine;
 
 /**
  * PaymentGUI is a GUI of calculate a total and input a cash customer
+ * 
  * @author Wanchanapon Thanwaranurak
  * @version 14.5.17
  */

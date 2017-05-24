@@ -22,7 +22,7 @@ public class Main {
 				try {
 					terrariumGUI.run();
 				} catch (Exception e) {
-					e.printStackTrace();
+					// DO nothing
 				}
 			}
 		});
