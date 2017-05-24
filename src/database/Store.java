@@ -3,7 +3,6 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,14 +10,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import application.ProductLine;
-
+/**
+ * Class for pull data from the database.
+ * 
+ * @author Jirayu Laungwilawan
+ * @version 14.5.17
+ */
 public class Store {
-	private static Store store = null;
-	// List<ProductLine> productLine = new ArrayList<>();
-	Map<String, List<String>> productMap = new HashMap<>();
+	/** Define the null Object */
+	private static final Store NOOP = null;
+	/** Define the Store */
+	private static Store store = NOOP;
+	/** Map of the productMap */
+	Map<String, List<String>> productMap;
 
-	private Store() throws SQLException {
+	/**
+	 * Initialize the constructor.
+	 */
+	private Store() {
+		productMap = new HashMap<>();
 		Connection myConn = null;
 		Statement myStmt = null;
 		ResultSet myRs = null;
@@ -39,48 +49,52 @@ public class Store {
 				System.out.println(
 						myRs.getString("product_id") + ", " + myRs.getString("name") + ", " + myRs.getString("price"));
 
+				// 5. Put the data into map.
 				productMap.put(myRs.getString("product_id"),
 						new ArrayList<String>(Arrays.asList(myRs.getString("name"), myRs.getString("price"))));
-				// productLine.add(
-				// new ProductLine(myRs.getInt("product_id"),
-				// myRs.getString("name"), myRs.getDouble("price")));
 			}
 		} catch (Exception exc) {
-			exc.printStackTrace();
+			// Do nothing
 		} finally {
 			// For check the database in List
 			// for (ProductLine productLine : line) {
 			// System.out.println(productLine);
 			// }
-			if (myRs != null) {
-				myRs.close();
-			}
+			try {
+				if (myRs != null) {
+					myRs.close();
+				}
 
-			if (myStmt != null) {
-				myStmt.close();
-			}
+				if (myStmt != null) {
+					myStmt.close();
+				}
 
-			if (myConn != null) {
-				myConn.close();
+				if (myConn != null) {
+					myConn.close();
+				}
+			} catch (Exception e) {
+				// Do nothing
 			}
 		}
 	}
 
+	/**
+	 * Return all information of the Store.
+	 * 
+	 * @return the Store
+	 */
 	public static Store getInstance() {
 		if (store == null)
-			try {
-				store = new Store();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			store = new Store();
 		return store;
 
 	}
 
-	// public List<ProductLine> getProductLine() {
-	// return productLine;
-	// }
-
+	/**
+	 * Return the map of the product in database.
+	 * 
+	 * @return map of the product in database.
+	 */
 	public Map<String, List<String>> getProductMap() {
 		return productMap;
 	}

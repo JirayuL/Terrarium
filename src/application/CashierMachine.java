@@ -2,8 +2,6 @@ package application;
 
 import java.util.Observable;
 
-import terrariumGUI.ChangeGUI;
-
 /**
  * 
  * @author Wanchanapon Thanwaranurak

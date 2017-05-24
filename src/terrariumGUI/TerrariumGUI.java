@@ -44,7 +44,9 @@ import java.util.Vector;
  * @version 14.5.17
  */
 public class TerrariumGUI extends JFrame implements Observer {
-
+	/**
+	 * First version of the TerrariumGUI.
+	 */
 	private static final long serialVersionUID = 1L;
 	private static TerrariumGUI instance;
 	private Store store;
@@ -53,7 +55,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 	private JTable table;
 	private JLabel labelSubtotal;
 	private PaymentGUI paymentGUI;
-	private Map<String, Integer> saleMap = new HashMap<String, Integer>();
+	private Map<String, Integer> saleMap;
 	private CashierMachine cashier;
 	private int number = 0;
 	private JToolBar toolBar;
@@ -70,15 +72,24 @@ public class TerrariumGUI extends JFrame implements Observer {
 		this.store = Store.getInstance();
 		this.cashier = CashierMachine.getInstance();
 		this.paymentGUI = PaymentGUI.getInstance();
+		this.saleMap = new HashMap<String, Integer>();
 		initComponents();
 	}
 
+	/**
+	 * Get all the information of the TerrariumGUI.
+	 * 
+	 * @return the TerrariumGUI
+	 */
 	public static TerrariumGUI getInstance() {
 		if (instance == null)
 			instance = new TerrariumGUI();
 		return instance;
 	}
 
+	/**
+	 * Set the visibility of the GUI to true.
+	 */
 	public void run() {
 		frame.setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -206,16 +217,32 @@ public class TerrariumGUI extends JFrame implements Observer {
 
 	}
 
+	/**
+	 * Initialize the header of the table.
+	 * 
+	 * @param dmodel
+	 *            TableModel to add the header.
+	 */
 	private void initTable(DefaultTableModel dmodel) {
 		String[] COLUMN_NAMES = new String[] { "#", "Product ID", "Name", "Quantity", "Total" };
 		for (String string : COLUMN_NAMES)
 			dmodel.addColumn(string);
 	}
 
+	/**
+	 * Check whether it in the map.
+	 * 
+	 * @param id
+	 *            of the product.
+	 * @return true if it's in the map otherwise false.
+	 */
 	private boolean InMap(String id) {
 		return store.getProductMap().containsKey(id);
 	}
 
+	/**
+	 * Clear all table model data.
+	 */
 	public void clearAllTable() {
 		int rowCount = dmodel.getRowCount();
 		for (int i = rowCount - 1; i >= 0; i--) {
@@ -225,6 +252,12 @@ public class TerrariumGUI extends JFrame implements Observer {
 		updateNumber();
 	}
 
+	/**
+	 * Update the data when add the same product.
+	 * 
+	 * @param id
+	 *            of the product.
+	 */
 	private void updateTable(String id) {
 		for (int i = 0; i < dmodel.getRowCount(); i++) {
 			if (dmodel.getValueAt(i, 1).equals(id)) {
@@ -234,10 +267,16 @@ public class TerrariumGUI extends JFrame implements Observer {
 		}
 	}
 
+	/**
+	 * Clear all data in the map.
+	 */
 	public void clearMap() {
 		saleMap.clear();
 	}
 
+	/**
+	 * Update column # to be the actual one.
+	 */
 	private void updateNumber() {
 		for (int i = 0; i < dmodel.getRowCount(); i++) {
 			dmodel.setValueAt(i + 1, i, 0);
@@ -254,41 +293,79 @@ public class TerrariumGUI extends JFrame implements Observer {
 		}
 	}
 
+	/**
+	 * Abstract class for handling the TableAction.
+	 * 
+	 * @author Jirayu Laungwilawan
+	 * @version 23.5.17
+	 * @param <T>
+	 *            is the sub class of the JTable.
+	 * @param <M>
+	 *            is the sub class of the TableModel
+	 */
 	public abstract class AbstractTableAction<T extends JTable, M extends TableModel> extends AbstractAction {
 
 		/**
-		 * 
+		 * First version of the TerrariumGUI.
 		 */
 		private static final long serialVersionUID = 1L;
 		private T table;
 		private M model;
 
+		/**
+		 * Initialize the constructor.
+		 * 
+		 * @param table
+		 *            that extends JTable
+		 * @param model
+		 *            that extends TableModel
+		 */
 		public AbstractTableAction(T table, M model) {
 			this.table = table;
 			this.model = model;
 		}
 
+		/**
+		 * Return table that extends JTable.
+		 * 
+		 * @return table
+		 */
 		public T getTable() {
 			return table;
 		}
 
+		/**
+		 * Return model that extends TableModel.
+		 * 
+		 * @return model
+		 */
 		public M getModel() {
 			return model;
 		}
 
 	}
 
+	/**
+	 * Class for delete selected item action of the table to perform.
+	 * 
+	 * @author Jirayu Laungwilawan
+	 * @version 23.5.17
+	 */
 	public class DeleteRowFromTableAction extends AbstractTableAction<JTable, DefaultTableModel> {
 
 		/**
-		 * 
+		 * First version of the TerrariumGUI.
 		 */
 		private static final long serialVersionUID = 1L;
 
+		/**
+		 * Initialize the constructor.
+		 * 
+		 * @param table
+		 * @param model
+		 */
 		public DeleteRowFromTableAction(JTable table, DefaultTableModel model) {
 			super(table, model);
-			putValue(NAME, "Delete selected rows");
-			putValue(SHORT_DESCRIPTION, "Delete selected rows");
 			table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 				@Override
 				public void valueChanged(ListSelectionEvent e) {

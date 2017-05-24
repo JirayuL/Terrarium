@@ -8,6 +8,7 @@ import application.CashierMachine;
 
 import java.awt.Font;
 import javax.swing.JButton;
+
 /**
  * 
  * @author PaiizZ

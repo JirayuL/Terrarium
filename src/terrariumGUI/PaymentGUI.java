@@ -20,16 +20,21 @@ import javax.swing.SwingConstants;
 
 import application.CashierMachine;
 
+/**
+ * 
+ * @author
+ * @version
+ */
 public class PaymentGUI implements Observer {
 	private static PaymentGUI instance;
 	private CashierMachine cashier;
 	private JFrame frame;
 	private JTextField textCash;
 	private JButton button1Baht, button2Baht, button5Baht, button10Baht, button20Baht, button50Baht, button100Baht,
-	button500Baht, button1000Baht, btnEnter;
+			button500Baht, button1000Baht, btnEnter;
 	private Image img1Baht, img2Baht, img5Baht, img10Baht, img20Baht, img50Baht, img100Baht, img500Baht, img1000Baht;
 	private Image resize1Baht, resize2Baht, resize5Baht, resize10Baht, resize20Baht, resize50Baht, resize100Baht,
-	resize500Baht, resize1000Baht;
+			resize500Baht, resize1000Baht;
 	private JLabel lblSubTotal, lblVat, lblTotal, lblCash, lblShowSubTotal, lblShowVAT, lblShowTotal;
 	private double oneBaht = 1, twoBaht = 2, fiveBaht = 5, tenBaht = 10, twentyBaht = 20, fiftyBaht = 50,
 			hundredBaht = 100, fivehundredBaht = 500, thousandBaht = 1000;
@@ -50,10 +55,17 @@ public class PaymentGUI implements Observer {
 		}
 	}
 
-	public static PaymentGUI getInstance(){
-		if(instance == null ) instance = new PaymentGUI();
+	/**
+	 * Get all the information of the PaymentGUI.
+	 * 
+	 * @return the PaymentGUI.
+	 */
+	public static PaymentGUI getInstance() {
+		if (instance == null)
+			instance = new PaymentGUI();
 		return instance;
 	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 * 
@@ -216,7 +228,7 @@ public class PaymentGUI implements Observer {
 		btnEnter.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		btnEnter.setBounds(482, 265, 180, 70);
 		btnEnter.addActionListener((e) -> {
-			if(cashier.getCash() >= cashier.getTotal()){
+			if (cashier.getCash() >= cashier.getTotal()) {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
@@ -227,8 +239,7 @@ public class PaymentGUI implements Observer {
 						}
 					}
 				});
-			}
-			else{
+			} else {
 				JOptionPane.showMessageDialog(null, "Insufficient fund.");
 			}
 		});
@@ -245,10 +256,16 @@ public class PaymentGUI implements Observer {
 
 	}
 
+	/**
+	 * Set the visibility to true.
+	 */
 	public void run() {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Set the visibility to false.
+	 */
 	public void close() {
 		frame.setVisible(false);
 	}
