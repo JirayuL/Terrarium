@@ -6,13 +6,11 @@ import javax.swing.JFrame;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
-import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -228,7 +226,7 @@ public class PaymentGUI implements Observer {
 			});
 		});
 		frame.getContentPane().add(btnEnter);
-		
+
 		btnCancel = new JButton("Cancel");
 		btnCancel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		btnCancel.setBounds(353, 265, 110, 70);
@@ -243,7 +241,7 @@ public class PaymentGUI implements Observer {
 	public void run() {
 		frame.setVisible(true);
 	}
-	
+
 	public void close() {
 		frame.setVisible(false);
 	}

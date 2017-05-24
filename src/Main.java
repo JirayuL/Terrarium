@@ -2,7 +2,6 @@ import java.awt.EventQueue;
 
 import application.CashierMachine;
 import database.Store;
-import terrariumGUI.ChangeGUI;
 import terrariumGUI.PaymentGUI;
 import terrariumGUI.TerrariumGUI;
 

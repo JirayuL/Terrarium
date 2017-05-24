@@ -65,9 +65,10 @@ public class TerrariumGUI extends JFrame implements Observer {
 		this.paymentGUI = PaymentGUI.getInstance();
 		initComponents();
 	}
-	
-	public static TerrariumGUI getInstance(){
-		if(instance == null ) instance = new TerrariumGUI();
+
+	public static TerrariumGUI getInstance() {
+		if (instance == null)
+			instance = new TerrariumGUI();
 		return instance;
 	}
 
@@ -271,7 +272,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 
 				for (Vector rowValue : selectedRows) {
 					int rowIndex = rowData.indexOf(rowValue);
-					cashier.subtractSubtotal(Double.parseDouble(model.getValueAt(rowIndex, 4)+""));
+					cashier.subtractSubtotal(Double.parseDouble(model.getValueAt(rowIndex, 4) + ""));
 					model.removeRow(rowIndex);
 				}
 			}

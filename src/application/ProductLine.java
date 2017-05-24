@@ -1,38 +1,60 @@
 package application;
 
+/**
+ * Object for product contains id, name and price.
+ * 
+ * @author Jirayu Laungwilawan
+ * @version 23.5.17
+ */
 public class ProductLine implements Comparable<ProductLine> {
+	/** Id of the product */
 	private int id;
+	/** Name of the product */
 	private String name;
+	/** Price of the product */
 	private double price;
 
+	/**
+	 * Initialize construtor for ProductLine.
+	 * 
+	 * @param id
+	 *            of the product.
+	 * @param name
+	 *            of the product.
+	 * @param price
+	 *            of the product.
+	 */
 	public ProductLine(int id, String name, double price) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
 	}
 
+	/**
+	 * Return id of the product.
+	 * 
+	 * @return id of the product.
+	 */
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	/**
+	 * Return name of the product.
+	 * 
+	 * @return name of the product.
+	 */
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	/**
+	 * Return price of the product.
+	 * 
+	 * @return price of the product.
+	 */
 	public double getPrice() {
 		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
 	}
 
 	@Override

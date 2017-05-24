@@ -7,7 +7,7 @@ import terrariumGUI.ChangeGUI;
 public class CashierMachine extends Observable {
 	private static CashierMachine instance;
 	private final double VAT = 0.07;
-	private double subtotal,total,vat,cash,change;
+	private double subtotal, total, vat, cash, change;
 
 	/**
 	 * Initialize a
@@ -18,9 +18,10 @@ public class CashierMachine extends Observable {
 		vat = 0;
 		cash = 0;
 	}
-	
-	public static CashierMachine getInstance(){
-		if(instance == null ) instance = new CashierMachine();
+
+	public static CashierMachine getInstance() {
+		if (instance == null)
+			instance = new CashierMachine();
 		return instance;
 	}
 
@@ -31,7 +32,7 @@ public class CashierMachine extends Observable {
 	public double getSubtotal() {
 		return subtotal;
 	}
-	
+
 	public void subtractSubtotal(double money) {
 		this.subtotal -= money;
 		calculateVAT();
@@ -75,7 +76,7 @@ public class CashierMachine extends Observable {
 	private void calculateTotal() {
 		total = subtotal + vat;
 	}
-	
+
 	private void calculateChange() {
 		change = cash - total;
 	}
