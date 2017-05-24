@@ -6,6 +6,7 @@ import terrariumGUI.TerrariumGUI;
 
 /**
  * Main class for run, show main page of Terrarium application
+ * 
  * @author Wanchanapon Thanwaranurak
  * @version 14.5.17
  */
