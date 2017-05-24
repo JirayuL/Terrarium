@@ -4,6 +4,11 @@ import java.util.Observable;
 
 import terrariumGUI.ChangeGUI;
 
+/**
+ * 
+ * @author Wanchanapon Thanwaranurak
+ * @version
+ */
 public class CashierMachine extends Observable {
 	private static CashierMachine instance;
 	private final double VAT = 0.07;

@@ -11,13 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import application.CashierMachine;
-import application.ProductLine;
 import database.Store;
 
 import javax.swing.JTextField;
@@ -41,10 +38,10 @@ import java.util.Observer;
 import java.util.Vector;
 
 /**
- * GUI for
+ * GUI for Terrarium project
  * 
- * @author Gear
- *
+ * @author Wanchanapon Thanwaranurak, Jirayu Laungwilawan
+ * @version 14.5.17
  */
 public class TerrariumGUI extends JFrame implements Observer {
 
@@ -56,7 +53,6 @@ public class TerrariumGUI extends JFrame implements Observer {
 	private JTable table;
 	private JLabel labelSubtotal;
 	private PaymentGUI paymentGUI;
-	private List<ProductLine> productLine = new ArrayList<ProductLine>();
 	private Map<String, Integer> saleMap = new HashMap<String, Integer>();
 	private CashierMachine cashier;
 	private int number = 0;
@@ -181,6 +177,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 				dmodel.addRow(new String[] { String.format("%d", ++number), id, name, String.format("%d", qty),
 						String.format("%.2f", getPrice * qty) });
 			}
+			updateNumber();
 			idField.setText("");
 			quantityField.setText("1");
 		});
@@ -224,6 +221,8 @@ public class TerrariumGUI extends JFrame implements Observer {
 		for (int i = rowCount - 1; i >= 0; i--) {
 			dmodel.removeRow(i);
 		}
+		number = 0;
+		updateNumber();
 	}
 
 	private void updateTable(String id) {
@@ -232,6 +231,16 @@ public class TerrariumGUI extends JFrame implements Observer {
 				dmodel.removeRow(i);
 				break;
 			}
+		}
+	}
+
+	public void clearMap() {
+		saleMap.clear();
+	}
+
+	private void updateNumber() {
+		for (int i = 0; i < dmodel.getRowCount(); i++) {
+			dmodel.setValueAt(i + 1, i, 0);
 		}
 	}
 
@@ -247,6 +256,10 @@ public class TerrariumGUI extends JFrame implements Observer {
 
 	public abstract class AbstractTableAction<T extends JTable, M extends TableModel> extends AbstractAction {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private T table;
 		private M model;
 
@@ -266,6 +279,11 @@ public class TerrariumGUI extends JFrame implements Observer {
 	}
 
 	public class DeleteRowFromTableAction extends AbstractTableAction<JTable, DefaultTableModel> {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		public DeleteRowFromTableAction(JTable table, DefaultTableModel model) {
 			super(table, model);
@@ -299,6 +317,8 @@ public class TerrariumGUI extends JFrame implements Observer {
 					model.removeRow(rowIndex);
 				}
 			}
+			number = 0;
+			updateNumber();
 		}
 
 	}
