@@ -7,6 +7,9 @@ import javax.swing.SwingConstants;
 import application.CashierMachine;
 
 import java.awt.Font;
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.JButton;
 
 /**
@@ -15,7 +18,7 @@ import javax.swing.JButton;
  * @author Wanchanapon Thanwaranurak
  * @version 14.5.17
  */
-public class ChangeGUI {
+public class ChangeGUI implements Observer{
 	private CashierMachine cashier;
 	private JFrame frame;
 	private JLabel lblChange, lblShowChange;
@@ -87,5 +90,16 @@ public class ChangeGUI {
 	 */
 	public void close() {
 		frame.setVisible(false);
+	}
+
+	@Override
+	public void update(Observable subject, Object info) {
+		// TODO Auto-generated method stub
+		if (info != null)
+			System.out.println(info);
+		if (subject instanceof CashierMachine) {
+			CashierMachine cashierMachine = (CashierMachine) subject;
+			lblShowChange.setText(String.format("%.2f", cashierMachine.getChange()));
+		}
 	}
 }

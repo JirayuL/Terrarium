@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 
 import application.CashierMachine;
+import terrariumGUI.ChangeGUI;
 import terrariumGUI.PaymentGUI;
 import terrariumGUI.TerrariumGUI;
 
@@ -15,8 +16,10 @@ public class Main {
 		CashierMachine cashier = CashierMachine.getInstance();
 		TerrariumGUI terrariumGUI = TerrariumGUI.getInstance();
 		PaymentGUI paymentGUI = PaymentGUI.getInstance();
+		ChangeGUI changeGUI = ChangeGUI.getInstance();
 		cashier.addObserver(terrariumGUI);
 		cashier.addObserver(paymentGUI);
+		cashier.addObserver(changeGUI);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

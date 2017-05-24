@@ -26,7 +26,7 @@ import application.CashierMachine;
  * @author Wanchanapon Thanwaranurak
  * @version 14.5.17
  */
-public class PaymentGUI implements Observer {
+public class PaymentGUI extends JFrame implements Observer {
 	private static PaymentGUI instance;
 	private CashierMachine cashier;
 	private JFrame frame;
@@ -226,6 +226,7 @@ public class PaymentGUI implements Observer {
 		btnEnter.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		btnEnter.setBounds(482, 265, 180, 70);
 		btnEnter.addActionListener((e) -> {
+			cashier.setCash(Double.parseDouble(textCash.getText()));
 			if (cashier.getCash() >= cashier.getTotal()) {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
