@@ -98,4 +98,13 @@ public class CashierMachine extends Observable {
 		calculateChange();
 		return change;
 	}
+	
+	public void resetCashierMachine() {
+		subtotal = 0;
+		total = 0;
+		vat = 0;
+		cash = 0;
+		setChanged();
+		notifyObservers();
+	}
 }

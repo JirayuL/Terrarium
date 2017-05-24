@@ -65,7 +65,8 @@ public class ChangeGUI {
 
 			PaymentGUI.getInstance().close();
 			TerrariumGUI.getInstance().clearAllTable();
-			cashier.setSubtotal(0);
+			TerrariumGUI.getInstance().clearMap();
+			cashier.resetCashierMachine();
 			close();
 		});
 		frame.getContentPane().add(btnEnd);
