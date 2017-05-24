@@ -46,8 +46,8 @@ public class Store {
 			// 4. Process the result set
 			while (myRs.next()) {
 				// For check data in the database
-				System.out.println(
-						myRs.getString("product_id") + ", " + myRs.getString("name") + ", " + myRs.getString("price"));
+				// System.out.println(
+				// myRs.getString("product_id") + ", " + myRs.getString("name") + ", " + myRs.getString("price"));
 
 				// 5. Put the data into map.
 				productMap.put(myRs.getString("product_id"),
