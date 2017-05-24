@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -31,11 +33,19 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Vector;
 
+/**
+ * GUI for
+ * 
+ * @author Gear
+ *
+ */
 public class TerrariumGUI extends JFrame implements Observer {
 
 	private static final long serialVersionUID = 1L;
@@ -47,6 +57,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 	private JLabel labelSubtotal;
 	private PaymentGUI paymentGUI;
 	private List<ProductLine> productLine = new ArrayList<ProductLine>();
+	private Map<String, Integer> saleMap = new HashMap<String, Integer>();
 	private CashierMachine cashier;
 	private int number = 0;
 	private JToolBar toolBar;
@@ -161,8 +172,12 @@ public class TerrariumGUI extends JFrame implements Observer {
 				int qty = Integer.parseInt(quantityField.getText());
 				double getPrice = Double.parseDouble(store.getProductMap().get(id).get(1));
 				String name = store.getProductMap().get(id).get(0);
-				productLine.add(new ProductLine(Integer.parseInt(id), name, getPrice));
 				cashier.add(getPrice, qty);
+				if (saleMap.containsKey(id)) {
+					qty += saleMap.get(id);
+					updateTable(id);
+				}
+				saleMap.put(id, qty);
 				dmodel.addRow(new String[] { String.format("%d", ++number), id, name, String.format("%d", qty),
 						String.format("%.2f", getPrice * qty) });
 			}
@@ -211,6 +226,15 @@ public class TerrariumGUI extends JFrame implements Observer {
 		}
 	}
 
+	private void updateTable(String id) {
+		for (int i = 0; i < dmodel.getRowCount(); i++) {
+			if (dmodel.getValueAt(i, 1).equals(id)) {
+				dmodel.removeRow(i);
+				break;
+			}
+		}
+	}
+
 	@Override
 	public void update(Observable subject, Object info) {
 		if (info != null)
@@ -218,7 +242,6 @@ public class TerrariumGUI extends JFrame implements Observer {
 		if (subject instanceof CashierMachine) {
 			CashierMachine cashierMachine = (CashierMachine) subject;
 			labelSubtotal.setText(String.format("%.2f", cashierMachine.getSubtotal()));
-			// labelSubtotal.setHorizontalAlignment(SwingConstants.RIGHT);
 		}
 	}
 
@@ -261,16 +284,16 @@ public class TerrariumGUI extends JFrame implements Observer {
 		public void actionPerformed(ActionEvent e) {
 			JTable table = getTable();
 			if (table.getSelectedRowCount() > 0) {
-				List<Vector> selectedRows = new ArrayList<>(25);
+				List<Vector<?>> selectedRows = new ArrayList<>(25);
 				DefaultTableModel model = getModel();
-				Vector rowData = model.getDataVector();
+				Vector<?> rowData = model.getDataVector();
 				for (int row : table.getSelectedRows()) {
 					int modelRow = table.convertRowIndexToModel(row);
-					Vector rowValue = (Vector) rowData.get(modelRow);
+					Vector<?> rowValue = (Vector<?>) rowData.get(modelRow);
 					selectedRows.add(rowValue);
 				}
 
-				for (Vector rowValue : selectedRows) {
+				for (Vector<?> rowValue : selectedRows) {
 					int rowIndex = rowData.indexOf(rowValue);
 					cashier.subtractSubtotal(Double.parseDouble(model.getValueAt(rowIndex, 4) + ""));
 					model.removeRow(rowIndex);

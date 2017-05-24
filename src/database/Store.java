@@ -15,7 +15,7 @@ import application.ProductLine;
 
 public class Store {
 	private static Store store = null;
-	List<ProductLine> productLine = new ArrayList<>();
+	// List<ProductLine> productLine = new ArrayList<>();
 	Map<String, List<String>> productMap = new HashMap<>();
 
 	private Store() throws SQLException {
@@ -41,8 +41,9 @@ public class Store {
 
 				productMap.put(myRs.getString("product_id"),
 						new ArrayList<String>(Arrays.asList(myRs.getString("name"), myRs.getString("price"))));
-				productLine.add(
-						new ProductLine(myRs.getInt("product_id"), myRs.getString("name"), myRs.getDouble("price")));
+				// productLine.add(
+				// new ProductLine(myRs.getInt("product_id"),
+				// myRs.getString("name"), myRs.getDouble("price")));
 			}
 		} catch (Exception exc) {
 			exc.printStackTrace();
@@ -76,9 +77,9 @@ public class Store {
 
 	}
 
-	public List<ProductLine> getProductLine() {
-		return productLine;
-	}
+	// public List<ProductLine> getProductLine() {
+	// return productLine;
+	// }
 
 	public Map<String, List<String>> getProductMap() {
 		return productMap;
