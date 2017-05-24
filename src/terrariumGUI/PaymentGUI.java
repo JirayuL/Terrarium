@@ -18,8 +18,6 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
-
 import application.CashierMachine;
 
 public class PaymentGUI implements Observer {
