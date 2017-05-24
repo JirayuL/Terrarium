@@ -38,7 +38,7 @@ import java.util.Observer;
 import java.util.Vector;
 
 /**
- * GUI for Terrarium project
+ * TerrariumGUI class is a main page of Terrarium project
  * 
  * @author Wanchanapon Thanwaranurak, Jirayu Laungwilawan
  * @version 14.5.17
@@ -50,18 +50,19 @@ public class TerrariumGUI extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
 	private static TerrariumGUI instance;
 	private Store store;
+	private JPanel panel;
 	private JFrame frame;
 	private JTextField idField, quantityField;
 	private JTable table;
-	private JLabel labelSubtotal;
+	private JLabel labelSubtotal, lblProductID,lblQuantity,lblTotal;
 	private PaymentGUI paymentGUI;
 	private Map<String, Integer> saleMap;
 	private CashierMachine cashier;
 	private int number = 0;
 	private JToolBar toolBar;
 	private DefaultTableModel dmodel;
-	private JButton clearAll;
-	private JButton deleteSelected;
+	private JButton clearAll,deleteSelected,btnCheckout,btnAdd;
+	private JScrollPane scPane;
 
 	/**
 	 * Create the application.
@@ -105,21 +106,21 @@ public class TerrariumGUI extends JFrame implements Observer {
 		frame.setBounds(30, 30, 700, 430);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Product ID :");
-		lblNewLabel.setBounds(41, 27, 74, 16);
-		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-		panel.add(lblNewLabel);
+		lblProductID = new JLabel("Product ID :");
+		lblProductID.setBounds(41, 27, 74, 16);
+		lblProductID.setVerticalAlignment(SwingConstants.TOP);
+		panel.add(lblProductID);
 
 		idField = new JTextField();
 		idField.setBounds(142, 22, 130, 26);
 		panel.add(idField);
 		idField.setColumns(10);
 
-		JLabel lblQuantity = new JLabel("Quantity :");
+		lblQuantity = new JLabel("Quantity :");
 		lblQuantity.setBounds(305, 27, 62, 16);
 		panel.add(lblQuantity);
 
@@ -146,17 +147,17 @@ public class TerrariumGUI extends JFrame implements Observer {
 		table = new JTable();
 		table.setModel(dmodel);
 
-		JScrollPane scPane = new JScrollPane(table);
+		scPane = new JScrollPane(table);
 		scPane.setBounds(41, 60, 609, 222);
 		panel.add(scPane);
 
-		JLabel lblNewLabel_1 = new JLabel("TOTAL");
-		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(42, 301, 159, 77);
-		panel.add(lblNewLabel_1);
+		lblTotal = new JLabel("TOTAL");
+		lblTotal.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
+		lblTotal.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTotal.setBounds(42, 301, 159, 77);
+		panel.add(lblTotal);
 
-		JButton btnCheckout = new JButton("Check Out");
+		btnCheckout = new JButton("Check Out");
 		btnCheckout.setFont(new Font("Lucida Grande", Font.PLAIN, 23));
 		btnCheckout.addActionListener((e) -> {
 			EventQueue.invokeLater(new Runnable() {
@@ -172,7 +173,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 		btnCheckout.setBounds(506, 294, 144, 78);
 		panel.add(btnCheckout);
 
-		JButton btnAdd = new JButton("ADD");
+		btnAdd = new JButton("ADD");
 		btnAdd.addActionListener((e) -> {
 			String id = idField.getText();
 			if (InMap(id) && quantityField != null) {
@@ -220,8 +221,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 	/**
 	 * Initialize the header of the table.
 	 * 
-	 * @param dmodel
-	 *            TableModel to add the header.
+	 * @param dmodel is a TableModel to add the header.
 	 */
 	private void initTable(DefaultTableModel dmodel) {
 		String[] COLUMN_NAMES = new String[] { "#", "Product ID", "Name", "Quantity", "Total" };
@@ -232,8 +232,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 	/**
 	 * Check whether it in the map.
 	 * 
-	 * @param id
-	 *            of the product.
+	 * @param id of the product.
 	 * @return true if it's in the map otherwise false.
 	 */
 	private boolean InMap(String id) {
@@ -255,8 +254,7 @@ public class TerrariumGUI extends JFrame implements Observer {
 	/**
 	 * Update the data when add the same product.
 	 * 
-	 * @param id
-	 *            of the product.
+	 * @param id of the product.
 	 */
 	private void updateTable(String id) {
 		for (int i = 0; i < dmodel.getRowCount(); i++) {
@@ -283,6 +281,9 @@ public class TerrariumGUI extends JFrame implements Observer {
 		}
 	}
 
+	/**
+	 * Update of labelSubtotal, when total change
+	 */
 	@Override
 	public void update(Observable subject, Object info) {
 		if (info != null)
@@ -298,10 +299,8 @@ public class TerrariumGUI extends JFrame implements Observer {
 	 * 
 	 * @author Jirayu Laungwilawan
 	 * @version 23.5.17
-	 * @param <T>
-	 *            is the sub class of the JTable.
-	 * @param <M>
-	 *            is the sub class of the TableModel
+	 * @param <T> is the sub class of the JTable.
+	 * @param <M> is the sub class of the TableModel
 	 */
 	public abstract class AbstractTableAction<T extends JTable, M extends TableModel> extends AbstractAction {
 

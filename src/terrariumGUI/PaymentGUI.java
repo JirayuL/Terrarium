@@ -21,9 +21,9 @@ import javax.swing.SwingConstants;
 import application.CashierMachine;
 
 /**
- * 
- * @author
- * @version
+ * PaymentGUI is a GUI of calculate a total and input a cash customer
+ * @author Wanchanapon Thanwaranurak
+ * @version 14.5.17
  */
 public class PaymentGUI implements Observer {
 	private static PaymentGUI instance;
@@ -41,10 +41,7 @@ public class PaymentGUI implements Observer {
 	private JButton btnCancel;
 
 	/**
-	 * Create the application.
-	 * 
-	 * @param cashier
-	 * @throws IOException
+	 * Constructor of the application.
 	 */
 	public PaymentGUI() {
 		this.cashier = CashierMachine.getInstance();
@@ -270,6 +267,9 @@ public class PaymentGUI implements Observer {
 		frame.setVisible(false);
 	}
 
+	/**
+	 * Update of all label, when cashierMachine change
+	 */
 	@Override
 	public void update(Observable subject, Object info) {
 		if (info != null)

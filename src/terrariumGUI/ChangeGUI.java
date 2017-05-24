@@ -10,9 +10,9 @@ import java.awt.Font;
 import javax.swing.JButton;
 
 /**
- * 
- * @author PaiizZ
- *
+ * ChangeGUI is a GUI of show a change to return customer
+ * @author Wanchanapon Thanwaranurak
+ * @version 14.5.17
  */
 public class ChangeGUI {
 	private CashierMachine cashier;
@@ -23,15 +23,17 @@ public class ChangeGUI {
 
 	/**
 	 * Create the application.
-	 * 
-	 * @param cashier
-	 * @param runnable
 	 */
 	public ChangeGUI() {
 		this.cashier = CashierMachine.getInstance();
 		initialize();
 	}
 
+	/**
+	 * Get all the information of the ChangeGUI.
+	 * 
+	 * @return the ChangeGUI
+	 */
 	public static ChangeGUI getInstance() {
 		if (instance == null)
 			instance = new ChangeGUI();
@@ -63,7 +65,6 @@ public class ChangeGUI {
 		btnEnd.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		btnEnd.setBounds(95, 184, 129, 41);
 		btnEnd.addActionListener((e) -> {
-
 			PaymentGUI.getInstance().close();
 			TerrariumGUI.getInstance().clearAllTable();
 			TerrariumGUI.getInstance().clearMap();
@@ -73,10 +74,16 @@ public class ChangeGUI {
 		frame.getContentPane().add(btnEnd);
 	}
 
+	/**
+	 * Set the visibility to true.
+	 */
 	public void run() {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Set the visibility to false.
+	 */
 	public void close() {
 		frame.setVisible(false);
 	}
