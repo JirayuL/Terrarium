@@ -40,6 +40,12 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Vector;
 
+/**
+ * GUI for
+ * 
+ * @author Gear
+ *
+ */
 public class TerrariumGUI extends JFrame implements Observer {
 
 	private static final long serialVersionUID = 1L;
@@ -219,8 +225,8 @@ public class TerrariumGUI extends JFrame implements Observer {
 			dmodel.removeRow(i);
 		}
 	}
-	
-	private void updateTable(String id){
+
+	private void updateTable(String id) {
 		for (int i = 0; i < dmodel.getRowCount(); i++) {
 			if (dmodel.getValueAt(i, 1).equals(id)) {
 				dmodel.removeRow(i);
@@ -236,7 +242,6 @@ public class TerrariumGUI extends JFrame implements Observer {
 		if (subject instanceof CashierMachine) {
 			CashierMachine cashierMachine = (CashierMachine) subject;
 			labelSubtotal.setText(String.format("%.2f", cashierMachine.getSubtotal()));
-			// labelSubtotal.setHorizontalAlignment(SwingConstants.RIGHT);
 		}
 	}
 
