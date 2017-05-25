@@ -5,8 +5,11 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import application.CashierMachine;
+import database.Sales;
 
 import java.awt.Font;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 

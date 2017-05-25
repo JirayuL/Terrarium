@@ -1,6 +1,10 @@
 import java.awt.EventQueue;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import application.CashierMachine;
+import database.Sales;
 import terrariumUI.ChangeUI;
 import terrariumUI.PaymentUI;
 import terrariumUI.TerrariumUI;
@@ -20,6 +24,7 @@ public class Main {
 		cashier.addObserver(terrariumGUI);
 		cashier.addObserver(paymentGUI);
 		cashier.addObserver(changeGUI);
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

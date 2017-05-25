@@ -45,21 +45,12 @@ public class Store {
 
 			// 4. Process the result set
 			while (myRs.next()) {
-				// For check data in the database
-				// System.out.println(
-				// myRs.getString("product_id") + ", " + myRs.getString("name") + ", " + myRs.getString("price"));
-
 				// 5. Put the data into map.
-				productMap.put(myRs.getString("product_id"),
-						new ArrayList<String>(Arrays.asList(myRs.getString("name"), myRs.getString("price"))));
+				productMap.put(myRs.getString("product_id"), new ArrayList<String>(Arrays.asList(myRs.getString("name"), myRs.getString("price"))));
 			}
 		} catch (Exception exc) {
 			// Do nothing
 		} finally {
-			// For check the database in List
-			// for (ProductLine productLine : line) {
-			// System.out.println(productLine);
-			// }
 			try {
 				if (myRs != null) {
 					myRs.close();

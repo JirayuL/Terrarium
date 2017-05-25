@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import application.CashierMachine;
+import database.Sales;
 import database.Store;
 
 import javax.swing.JTextField;
@@ -25,6 +26,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -47,13 +49,12 @@ public class TerrariumUI extends JFrame implements Observer {
 	private JTextField idField, quantityField;
 	private JTable table;
 	private JLabel labelSubtotal, lblProductID, lblQuantity, lblTotal;
-	private PaymentUI paymentGUI;
 	private Map<String, Integer> saleMap;
 	private CashierMachine cashier;
 	private int number = 0;
 	private JToolBar toolBar;
 	private DefaultTableModel dmodel;
-	private JButton clearAll, deleteSelected, btnCheckout, btnAdd;
+	private JButton clearAll, deleteSelected, btnCheckout, btnAdd, btnStatistic;
 	private JScrollPane scPane;
 
 	/**
@@ -64,7 +65,6 @@ public class TerrariumUI extends JFrame implements Observer {
 	public TerrariumUI() {
 		this.store = Store.getInstance();
 		this.cashier = CashierMachine.getInstance();
-		this.paymentGUI = PaymentUI.getInstance();
 		this.saleMap = new HashMap<String, Integer>();
 		initComponents();
 	}
@@ -155,7 +155,7 @@ public class TerrariumUI extends JFrame implements Observer {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						paymentGUI.run();
+						PaymentUI.getInstance().run();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -203,9 +203,23 @@ public class TerrariumUI extends JFrame implements Observer {
 			this.cashier.setSubtotal(0);
 		});
 
+		btnStatistic = new JButton("Statistic");
+		btnStatistic.addActionListener((e) -> {
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						StatisticUI.getInstance().run();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		});
+		
 		toolBar = new JToolBar();
 		toolBar.add(clearAll);
 		toolBar.add(deleteSelected);
+		toolBar.add(btnStatistic);
 		frame.add(toolBar, BorderLayout.NORTH);
 
 	}
@@ -281,6 +295,14 @@ public class TerrariumUI extends JFrame implements Observer {
 		for (int i = 0; i < dmodel.getRowCount(); i++) {
 			dmodel.setValueAt(i + 1, i, 0);
 		}
+	}
+	
+	/**
+	 * Get sales of product
+	 * @return Map of sales
+	 */
+	public Map<String, Integer> getSaleMap() {
+		return saleMap;
 	}
 
 	/**

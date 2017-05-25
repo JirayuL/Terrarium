@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import application.CashierMachine;
+import database.Sales;
 
 /**
  * PaymentGUI is a GUI of calculate a total and input a cash customer
@@ -227,7 +228,7 @@ public class PaymentUI extends JFrame implements Observer {
 		btnEnter.setBounds(482, 265, 180, 70);
 		btnEnter.addActionListener((e) -> {
 			cashier.setCash(Double.parseDouble(textCash.getText()));
-			if (cashier.getCash() >= cashier.getTotal()) {
+			if (Sales.getInstance().insertSaleToDatabase(TerrariumUI.getInstance().getSaleMap()) && cashier.getCash() >= cashier.getTotal()) {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
