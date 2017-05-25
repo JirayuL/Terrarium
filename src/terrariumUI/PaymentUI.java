@@ -89,7 +89,7 @@ public class PaymentUI extends JFrame implements Observer {
 		button2Baht = new JButton();
 		button2Baht.setBounds(97, 10, 75, 70);
 		img2Baht = ImageIO.read(getClass().getResource("/image/2coin.png"));
-		resize2Baht = img2Baht.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+		resize2Baht = img2Baht.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
 		button2Baht.setIcon(new ImageIcon(resize2Baht));
 		button2Baht.addActionListener((e) -> {
 			this.cashier.addCash(twoBaht);
