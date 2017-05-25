@@ -11,8 +11,8 @@ This project is made for `Wannasit` store. `Wannasit` store is my friend's famil
 - Add products to store.
 - Remove product from store.
 - Calculate the total price including tax.
-- Store statistic in the database
-- Show the sales statistic each day
+- Store statistics in the database
+- Show the sales statistics each day
 
 ## User Interface
 
