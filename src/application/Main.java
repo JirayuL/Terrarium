@@ -1,4 +1,5 @@
 package application;
+
 import java.awt.EventQueue;
 
 import controller.CashierMachine;
