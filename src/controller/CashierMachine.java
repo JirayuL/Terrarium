@@ -2,13 +2,18 @@ package controller;
 
 import java.util.Observable;
 
+import database.Sales;
+
 /**
  * CashierMachine class for calculate money of customer
  * @author Wanchanapon Thanwaranurak
  * @version 14.5.17
  */
 public class CashierMachine extends Observable {
-	private static CashierMachine instance;
+	/** Define the null Object */
+	private static final CashierMachine NOOP = null;
+	/** Define the Sales */
+	private static CashierMachine instance = NOOP;
 	/**
 	 * VAT of Thailand
 	 */

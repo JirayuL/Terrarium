@@ -26,7 +26,10 @@ import controller.ProductsSales;
  * @version 25/5/2017
  */
 public class StatisticUI implements Observer{
-	private static StatisticUI instance;
+	/** Define the null Object */
+	private static final StatisticUI NOOP = null;
+	/** Define the StatisticUI */
+	private static StatisticUI instance = NOOP;
 	private JFrame frame,jframe;
 	private JPanel contentPane;
 	private JTextField txtDate;

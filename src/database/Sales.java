@@ -11,14 +11,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import terrariumUI.TerrariumUI;
+
 /**
  * Sales class for insert data of sales to database
  * @author Wanchanapon Thanwaranurak
  * @version 24.5.17
  */
 public class Sales {
+	/** Define the null Object */
+	private static final Sales NOOP = null;
+	/** Define the Sales */
+	private static Sales instance = NOOP;
 	private Map<String, List<String>> productSales;
-	private static Sales instance;
 	private Connection myConn = null;
 	private Statement myStmt = null;
 	private ResultSet myRs = null;
@@ -47,17 +52,17 @@ public class Sales {
 	public boolean insertSaleToDatabase(Map<String, Integer> saleMap){ 
 		try { 
 			// 1. Get a connection to database
-			Connection conn =  DriverManager.getConnection("jdbc:mysql://158.108.141.127:3306/Terrarium", "root", "1234");
+			myConn =  DriverManager.getConnection("jdbc:mysql://158.108.141.127:3306/Terrarium", "root", "1234");
 
 			// 2. Create a statement
-			Statement st = conn.createStatement(); 
+			myStmt = myConn.createStatement(); 
 
 			SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
 			String nowDate = dateformat.format(new Date());
 			for(Map.Entry<String, Integer> entry : saleMap.entrySet()){
-				st.executeUpdate(String.format("INSERT INTO sales (Sale_date,Sale_id,Sale_quantity) VALUES ('%s', %d, %d)",nowDate,Integer.parseInt(entry.getKey()),entry.getValue())); 
+				myStmt.executeUpdate(String.format("INSERT INTO sales (Sale_date,Sale_id,Sale_quantity) VALUES ('%s', %d, %d)",nowDate,Integer.parseInt(entry.getKey()),entry.getValue())); 
 			}
-			conn.close(); 
+			myConn.close(); 
 			return true;
 		} catch (Exception e) { 
 			System.err.println("Got an exception! "); 

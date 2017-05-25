@@ -19,11 +19,15 @@ import controller.ProductsSales;
  * @version 14.5.17
  */
 public class ChangeUI implements Observer{
+	/** Define the null Object */
+	private static final ChangeUI NOOP = null;
+	/** Define the ChangeUI */
+	private static ChangeUI instance = NOOP;
 	private CashierMachine cashier;
 	private JFrame frame;
 	private JLabel lblChange, lblShowChange;
 	private JButton btnEnd;
-	private static ChangeUI instance;
+	
 
 	/**
 	 * Create the application.

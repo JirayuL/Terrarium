@@ -28,7 +28,10 @@ import database.Sales;
  * @version 14.5.17
  */
 public class PaymentUI extends JFrame implements Observer {
-	private static PaymentUI instance;
+	/** Define the null Object */
+	private static final PaymentUI NOOP = null;
+	/** Define the PaymentUI */
+	private static PaymentUI instance = NOOP;
 	private CashierMachine cashier;
 	private JFrame frame;
 	private JTextField textCash;

@@ -18,7 +18,10 @@ import terrariumUI.StatisticUI;
  * @version 25/5/2017
  */
 public class ProductsSales extends Observable{
-	private static ProductsSales instance;
+	/** Define the null Object */
+	private static final ProductsSales NOOP = null;
+	/** Define the ProductsSales */
+	private static ProductsSales instance = NOOP;
 	private Map<String, List<String>> productSales;
 	private Map<String, List<String>> productMap;
 	private Map<String, List<String>> mapProductsDay;

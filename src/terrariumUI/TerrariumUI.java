@@ -37,7 +37,10 @@ public class TerrariumUI extends JFrame implements Observer {
 	 * First version of the TerrariumGUI.
 	 */
 	private static final long serialVersionUID = 1L;
-	private static TerrariumUI instance;
+	/** Define the null Object */
+	private static final TerrariumUI NOOP = null;
+	/** Define the TerrariumUI */
+	private static TerrariumUI instance = NOOP;
 	private Store store;
 	private JPanel panel;
 	private JFrame frame;
