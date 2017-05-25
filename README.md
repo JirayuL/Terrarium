@@ -4,7 +4,7 @@
 
 Today, even a small convenience store has so many kind of items in their stock for them to manage. And things get even worse for a wholesale business, of which in their stock might be up to a thousand kinds of goods. The traditional paper-based solution are clumsy and error prone, so we think maybe it's the time for a computer-based solution for the of business. We expect this solution to help the wholesale business in managing their stock and keeping track of the price of each item.
 
-This project was inspired by the **Wannasit** store. **Wannasit** store is my friend's wholesale and retail store located in the *Suphanburi* Province. In the past, he used to ask me about creating a program for managing his family's store, so instead of teaching him I create one, will do it for him.
+This project was inspired by the **Wannasit** store. **Wannasit** store is my friend's wholesale and retail store located in the _Suphanburi_ Province. In the past, he used to ask me about creating a program for managing his family's store, so instead of teaching him I create one, will do it for him.
 
 ## Main Features
 
@@ -29,9 +29,9 @@ This project was inspired by the **Wannasit** store. **Wannasit** store is my fr
 
 ## Installation
 
-Click the following link to download.
+Click the following link.
 
-- link : [Terrarium.jar](https://github.com/JirayuL/Terrarium/raw/master/Terrarium.jar)
+- link : [Get it here!](https://github.com/JirayuL/Terrarium/releases/latest)
 
 ## Contributors
 
