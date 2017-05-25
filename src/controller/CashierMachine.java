@@ -2,8 +2,6 @@ package controller;
 
 import java.util.Observable;
 
-import database.Sales;
-
 /**
  * CashierMachine class for calculate money of customer
  * @author Wanchanapon Thanwaranurak

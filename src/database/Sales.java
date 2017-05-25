@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import terrariumUI.TerrariumUI;
-
 /**
  * Sales class for insert data of sales to database
  * @author Wanchanapon Thanwaranurak

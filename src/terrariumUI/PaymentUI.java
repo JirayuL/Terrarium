@@ -216,11 +216,12 @@ public class PaymentUI extends JFrame implements Observer {
 			@Override
 			public void focusGained(FocusEvent e) {
 				cashier.setCash(0);
+				textCash.setText("");
 			}
 
 			@Override
 			public void focusLost(FocusEvent e) {
-
+				// Do nothing
 			}
 
 		});
