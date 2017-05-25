@@ -1,35 +1,30 @@
 package terrariumUI;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
-
-import application.CashierMachine;
-import database.Sales;
-import database.Store;
-
-import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.JTable;
 import java.awt.Font;
-
-import javax.swing.JButton;
-
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
+import controller.CashierMachine;
+import controller.DeleteRowFromTableAction;
+import database.Store;
 
 /**
  * TerrariumGUI class is a main page of Terrarium project
@@ -262,7 +257,7 @@ public class TerrariumUI extends JFrame implements Observer {
 	/**
 	 * Set the number to zero.
 	 */
-	protected void setNumbertoZero() {
+	public void setNumbertoZero() {
 		number = 0;
 	}
 
@@ -291,7 +286,7 @@ public class TerrariumUI extends JFrame implements Observer {
 	/**
 	 * Update column # to be the actual one.
 	 */
-	protected void updateNumber() {
+	public void updateNumber() {
 		for (int i = 0; i < dmodel.getRowCount(); i++) {
 			dmodel.setValueAt(i + 1, i, 0);
 		}

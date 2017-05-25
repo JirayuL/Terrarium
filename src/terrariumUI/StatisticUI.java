@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import application.ProductsSales;
+import controller.ProductsSales;
 
 /**
  * StatisticUI for show statistic income in days.

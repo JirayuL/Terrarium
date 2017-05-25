@@ -1,19 +1,15 @@
 package terrariumUI;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
-import application.CashierMachine;
-import database.Sales;
-
 import java.awt.Font;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import controller.CashierMachine;
 
 /**
  * ChangeGUI is a GUI of show a change to return customer

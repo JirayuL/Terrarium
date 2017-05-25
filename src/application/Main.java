@@ -1,6 +1,8 @@
+package application;
+
 import java.awt.EventQueue;
 
-import application.CashierMachine;
+import controller.CashierMachine;
 import terrariumUI.ChangeUI;
 import terrariumUI.PaymentUI;
 import terrariumUI.TerrariumUI;

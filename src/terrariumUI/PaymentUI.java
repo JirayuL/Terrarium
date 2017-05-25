@@ -1,24 +1,24 @@
 package terrariumUI;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Image;
-import javax.swing.JFrame;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import application.CashierMachine;
+import controller.CashierMachine;
 import database.Sales;
 
 /**

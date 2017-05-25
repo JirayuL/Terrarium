@@ -1,4 +1,4 @@
-package application;
+package controller;
 
 /**
  * Object for product contains id, name and price.
