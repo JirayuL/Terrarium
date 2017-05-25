@@ -13,10 +13,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
+/**
+ * DatePickerUI to show calendar for choose date foe show statistic income in days.
+ * @author Wanchanapon Thanwaranurak
+ * @version 25/5/2017
+ */
 class DatePickerUI{
-	
-	//create object of JLabel with alignment
 	private JLabel label ;
 	private String day = "";
 	private JDialog dialog;
@@ -24,7 +26,10 @@ class DatePickerUI{
 	private JButton next,previous;
 	private int month = 0, year = 0;
 	private JPanel panel1,panel2;
-
+	
+	/**
+	 * Create constructor 
+	 */
 	public DatePickerUI(JFrame parent) {
 		month = Calendar.getInstance().get(Calendar.MONTH);
 		year = Calendar.getInstance().get(Calendar.YEAR);
@@ -83,6 +88,9 @@ class DatePickerUI{
 		dialog.setVisible(true);
 	}
 	
+	/**
+	 * Show display calendar for choose day
+	 */
 	public void displayDate() {
 		for (int x = 7; x < button.length; x++) button[x].setText("");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");	
@@ -95,6 +103,10 @@ class DatePickerUI{
 		dialog.setTitle("Date Picker");
 	}
 
+	/**
+	 * Set date that choose to string
+	 * @return date in format year-mounth-day
+	 */
 	public String setPickedDate() {
 		if (day.equals("")) return day;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
