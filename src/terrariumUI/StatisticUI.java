@@ -10,7 +10,6 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -25,13 +24,12 @@ import controller.ProductsSales;
  * @author Wanchanapon Thanwaranurak
  * @version 25/5/2017
  */
-public class StatisticUI implements Observer{
+public class StatisticUI implements Observer {
 	/** Define the null Object */
 	private static final StatisticUI NOOP = null;
 	/** Define the StatisticUI */
 	private static StatisticUI instance = NOOP;
-	private JFrame frame,jframe;
-	private JPanel contentPane;
+	private JFrame frame, jframe;
 	private JTextField txtDate;
 	private int number;
 	private String date;

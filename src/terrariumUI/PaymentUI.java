@@ -28,6 +28,10 @@ import database.Sales;
  * @version 14.5.17
  */
 public class PaymentUI extends JFrame implements Observer {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** Define the null Object */
 	private static final PaymentUI NOOP = null;
 	/** Define the PaymentUI */
@@ -232,7 +236,8 @@ public class PaymentUI extends JFrame implements Observer {
 		btnEnter.setBounds(482, 265, 180, 70);
 		btnEnter.addActionListener((e) -> {
 			cashier.setCash(Double.parseDouble(textCash.getText()));
-			if (Sales.getInstance().insertSaleToDatabase(TerrariumUI.getInstance().getSaleMap()) && cashier.getCash() >= cashier.getTotal()) {
+			if (Sales.getInstance().insertSaleToDatabase(TerrariumUI.getInstance().getSaleMap())
+					&& cashier.getCash() >= cashier.getTotal()) {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
