@@ -19,7 +19,7 @@ public class Sales {
 			String url = "jdbc:msql://localhost:3306/Terrarium"; 
 			
 			// 1. Get a connection to database
-			Connection conn =  DriverManager.getConnection("jdbc:mysql://158.108.141.127:3306/Terrarium", "root", "1234");
+			Connection conn =  DriverManager.getConnection("jdbc:mysql://10.0.1.69:3306/Terrarium", "root", "1234");
 			
 			// 2. Create a statement
 			Statement st = conn.createStatement(); 

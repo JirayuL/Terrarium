@@ -1,9 +1,9 @@
 import java.awt.EventQueue;
 
 import application.CashierMachine;
-import terrariumGUI.ChangeGUI;
-import terrariumGUI.PaymentGUI;
-import terrariumGUI.TerrariumGUI;
+import terrariumUI.ChangeUI;
+import terrariumUI.PaymentUI;
+import terrariumUI.TerrariumUI;
 
 /**
  * Main class for run, show main page of Terrarium application
@@ -14,9 +14,9 @@ import terrariumGUI.TerrariumGUI;
 public class Main {
 	public static void main(String[] args) {
 		CashierMachine cashier = CashierMachine.getInstance();
-		TerrariumGUI terrariumGUI = TerrariumGUI.getInstance();
-		PaymentGUI paymentGUI = PaymentGUI.getInstance();
-		ChangeGUI changeGUI = ChangeGUI.getInstance();
+		TerrariumUI terrariumGUI = TerrariumUI.getInstance();
+		PaymentUI paymentGUI = PaymentUI.getInstance();
+		ChangeUI changeGUI = ChangeUI.getInstance();
 		cashier.addObserver(terrariumGUI);
 		cashier.addObserver(paymentGUI);
 		cashier.addObserver(changeGUI);

@@ -1,4 +1,4 @@
-package terrariumGUI;
+package terrariumUI;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class DeleteRowFromTableAction extends AbstractTableAction<JTable, Defaul
 				model.removeRow(rowIndex);
 			}
 		}
-		TerrariumGUI instance = TerrariumGUI.getInstance();
+		TerrariumUI instance = TerrariumUI.getInstance();
 		instance.updateNumber();
 		instance.setNumbertoZero();
 	}

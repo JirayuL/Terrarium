@@ -1,4 +1,4 @@
-package terrariumGUI;
+package terrariumUI;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -35,19 +35,19 @@ import java.util.Observer;
  * @author Wanchanapon Thanwaranurak, Jirayu Laungwilawan
  * @version 14.5.17
  */
-public class TerrariumGUI extends JFrame implements Observer {
+public class TerrariumUI extends JFrame implements Observer {
 	/**
 	 * First version of the TerrariumGUI.
 	 */
 	private static final long serialVersionUID = 1L;
-	private static TerrariumGUI instance;
+	private static TerrariumUI instance;
 	private Store store;
 	private JPanel panel;
 	private JFrame frame;
 	private JTextField idField, quantityField;
 	private JTable table;
 	private JLabel labelSubtotal, lblProductID, lblQuantity, lblTotal;
-	private PaymentGUI paymentGUI;
+	private PaymentUI paymentGUI;
 	private Map<String, Integer> saleMap;
 	private CashierMachine cashier;
 	private int number = 0;
@@ -61,10 +61,10 @@ public class TerrariumGUI extends JFrame implements Observer {
 	 * 
 	 * @throws IOException
 	 */
-	public TerrariumGUI() {
+	public TerrariumUI() {
 		this.store = Store.getInstance();
 		this.cashier = CashierMachine.getInstance();
-		this.paymentGUI = PaymentGUI.getInstance();
+		this.paymentGUI = PaymentUI.getInstance();
 		this.saleMap = new HashMap<String, Integer>();
 		initComponents();
 	}
@@ -74,9 +74,9 @@ public class TerrariumGUI extends JFrame implements Observer {
 	 * 
 	 * @return the TerrariumGUI
 	 */
-	public static TerrariumGUI getInstance() {
+	public static TerrariumUI getInstance() {
 		if (instance == null)
-			instance = new TerrariumGUI();
+			instance = new TerrariumUI();
 		return instance;
 	}
 

@@ -1,4 +1,4 @@
-package terrariumGUI;
+package terrariumUI;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,17 +18,17 @@ import javax.swing.JButton;
  * @author Wanchanapon Thanwaranurak
  * @version 14.5.17
  */
-public class ChangeGUI implements Observer{
+public class ChangeUI implements Observer{
 	private CashierMachine cashier;
 	private JFrame frame;
 	private JLabel lblChange, lblShowChange;
 	private JButton btnEnd;
-	private static ChangeGUI instance;
+	private static ChangeUI instance;
 
 	/**
 	 * Create the application.
 	 */
-	public ChangeGUI() {
+	public ChangeUI() {
 		this.cashier = CashierMachine.getInstance();
 		initialize();
 	}
@@ -38,9 +38,9 @@ public class ChangeGUI implements Observer{
 	 * 
 	 * @return the ChangeGUI
 	 */
-	public static ChangeGUI getInstance() {
+	public static ChangeUI getInstance() {
 		if (instance == null)
-			instance = new ChangeGUI();
+			instance = new ChangeUI();
 		return instance;
 	}
 
@@ -69,9 +69,9 @@ public class ChangeGUI implements Observer{
 		btnEnd.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		btnEnd.setBounds(95, 184, 129, 41);
 		btnEnd.addActionListener((e) -> {
-			PaymentGUI.getInstance().close();
-			TerrariumGUI.getInstance().clearAllTable();
-			TerrariumGUI.getInstance().clearMap();
+			PaymentUI.getInstance().close();
+			TerrariumUI.getInstance().clearAllTable();
+			TerrariumUI.getInstance().clearMap();
 			cashier.resetCashierMachine();
 			close();
 		});

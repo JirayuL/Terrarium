@@ -1,4 +1,4 @@
-package terrariumGUI;
+package terrariumUI;
 
 import javax.swing.AbstractAction;
 import javax.swing.JTable;

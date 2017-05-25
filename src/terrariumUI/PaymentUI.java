@@ -1,4 +1,4 @@
-package terrariumGUI;
+package terrariumUI;
 
 import java.awt.EventQueue;
 import java.awt.Image;
@@ -26,8 +26,8 @@ import application.CashierMachine;
  * @author Wanchanapon Thanwaranurak
  * @version 14.5.17
  */
-public class PaymentGUI extends JFrame implements Observer {
-	private static PaymentGUI instance;
+public class PaymentUI extends JFrame implements Observer {
+	private static PaymentUI instance;
 	private CashierMachine cashier;
 	private JFrame frame;
 	private JTextField textCash;
@@ -44,7 +44,7 @@ public class PaymentGUI extends JFrame implements Observer {
 	/**
 	 * Constructor of the application.
 	 */
-	public PaymentGUI() {
+	public PaymentUI() {
 		this.cashier = CashierMachine.getInstance();
 		try {
 			initialize();
@@ -58,9 +58,9 @@ public class PaymentGUI extends JFrame implements Observer {
 	 * 
 	 * @return the PaymentGUI.
 	 */
-	public static PaymentGUI getInstance() {
+	public static PaymentUI getInstance() {
 		if (instance == null)
-			instance = new PaymentGUI();
+			instance = new PaymentUI();
 		return instance;
 	}
 
@@ -231,7 +231,7 @@ public class PaymentGUI extends JFrame implements Observer {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							ChangeGUI changeGUI = ChangeGUI.getInstance();
+							ChangeUI changeGUI = ChangeUI.getInstance();
 							changeGUI.run();
 						} catch (Exception e) {
 							e.printStackTrace();
