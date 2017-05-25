@@ -46,7 +46,7 @@ public class TerrariumUI extends JFrame implements Observer {
 	private JLabel labelSubtotal, lblProductID, lblQuantity, lblTotal;
 	private Map<String, Integer> saleMap;
 	private CashierMachine cashier;
-	private int number = 0;
+	private int number;
 	private JToolBar toolBar;
 	private DefaultTableModel dmodel;
 	private JButton clearAll, deleteSelected, btnCheckout, btnAdd, btnStatistic;
@@ -58,6 +58,7 @@ public class TerrariumUI extends JFrame implements Observer {
 	 * @throws IOException
 	 */
 	public TerrariumUI() {
+		this.number = 0;
 		this.store = Store.getInstance();
 		this.cashier = CashierMachine.getInstance();
 		this.saleMap = new HashMap<String, Integer>();
@@ -210,7 +211,7 @@ public class TerrariumUI extends JFrame implements Observer {
 				}
 			});
 		});
-		
+
 		toolBar = new JToolBar();
 		toolBar.add(clearAll);
 		toolBar.add(deleteSelected);
@@ -264,7 +265,8 @@ public class TerrariumUI extends JFrame implements Observer {
 	/**
 	 * Update the data when add the same product.
 	 * 
-	 * @param id of the product.
+	 * @param id
+	 *            of the product.
 	 */
 	private void updateTable(String id) {
 		for (int i = 0; i < dmodel.getRowCount(); i++) {
@@ -290,9 +292,10 @@ public class TerrariumUI extends JFrame implements Observer {
 			dmodel.setValueAt(i + 1, i, 0);
 		}
 	}
-	
+
 	/**
 	 * Get sales of product
+	 * 
 	 * @return Map of sales
 	 */
 	public Map<String, Integer> getSaleMap() {
