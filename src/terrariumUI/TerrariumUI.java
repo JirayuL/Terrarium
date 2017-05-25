@@ -134,6 +134,7 @@ public class TerrariumUI extends JFrame implements Observer {
 
 		table = new JTable();
 		table.setModel(dmodel);
+		table.getColumnModel().getColumn(2).setPreferredWidth(200);
 
 		scPane = new JScrollPane(table);
 		scPane.setBounds(41, 60, 609, 222);

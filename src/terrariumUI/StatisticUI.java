@@ -10,37 +10,35 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import controller.CashierMachine;
 import controller.ProductsSales;
 
 /**
  * StatisticUI for show statistic income in days.
+ * 
  * @author Wanchanapon Thanwaranurak
  * @version 25/5/2017
  */
-public class StatisticUI implements Observer{
+public class StatisticUI implements Observer {
 	private static StatisticUI instance;
-	private JFrame frame,jframe;
-	private JPanel contentPane;
+	private JFrame frame, jframe;
 	private JTextField txtDate;
-	private int number ;
+	private int number;
 	private String date;
 	private DefaultTableModel dmodel;
 	private Map<String, List<String>> mapProductsDay;
-	private JLabel labelShowTotal,lblStatistic,lblRevenueAtDate,lblTotal;
-	private JButton btnSelectDate,btnClose;
+	private JLabel labelShowTotal, lblStatistic, lblRevenueAtDate, lblTotal;
+	private JButton btnSelectDate, btnClose;
 	private JTable table;
 	private JScrollPane scrollPane;
 
 	/**
-	 * Create constructor 
+	 * Create constructor
 	 */
 	public StatisticUI() {
 		mapProductsDay = new HashMap<>();
@@ -73,6 +71,7 @@ public class StatisticUI implements Observer{
 
 		table = new JTable();
 		table.setModel(dmodel);
+		table.getColumnModel().getColumn(3).setPreferredWidth(200);
 
 		scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(27, 105, 438, 164);
@@ -140,10 +139,11 @@ public class StatisticUI implements Observer{
 	/**
 	 * Initialize the header of the table.
 	 * 
-	 * @param dmodel is a TableModel to add the header.
+	 * @param dmodel
+	 *            is a TableModel to add the header.
 	 */
 	private void initTable(DefaultTableModel dmodel) {
-		String[] COLUMN_NAMES = new String[] { "#","Date","Product ID", "Name", "Quantity", "Total" };
+		String[] COLUMN_NAMES = new String[] { "#", "Date", "Product ID", "Name", "Quantity", "Total" };
 		for (String string : COLUMN_NAMES)
 			dmodel.addColumn(string);
 	}
@@ -164,24 +164,28 @@ public class StatisticUI implements Observer{
 	protected void setNumbertoZero() {
 		number = 0;
 	}
-	
+
 	/**
 	 * Show a data of statistic in UI
-	 * @param productsSales is a ProductsSales object that contain information of statistic
+	 * 
+	 * @param productsSales
+	 *            is a ProductsSales object that contain information of
+	 *            statistic
 	 */
-	public void displayStatistic(ProductsSales productsSales){
+	public void displayStatistic(ProductsSales productsSales) {
 		setNumbertoZero();
 		clearAllTable();
 		productsSales.resetTotal();
 		clearAllTable();
 		date = txtDate.getText();
 		mapProductsDay = productsSales.getProductsDay(date);
-		for(Map.Entry< String, List<String> > entry : mapProductsDay.entrySet()){
-			dmodel.addRow(new String[] { String.format("%d", ++number), date ,entry.getKey(), entry.getValue().get(0) , entry.getValue().get(1), String.format("%.2f",Double.parseDouble(entry.getValue().get(2)))});
+		for (Map.Entry<String, List<String>> entry : mapProductsDay.entrySet()) {
+			dmodel.addRow(new String[] { String.format("%d", ++number), date, entry.getKey(), entry.getValue().get(0),
+					entry.getValue().get(1), String.format("%.2f", Double.parseDouble(entry.getValue().get(2))) });
 		}
 		labelShowTotal.setText(String.format("%.2f", ProductsSales.getInstance().getTotal()));
 	}
-	
+
 	/**
 	 * Update of view of statistic, when statistic change
 	 */
@@ -194,5 +198,5 @@ public class StatisticUI implements Observer{
 			displayStatistic(productsSales);
 		}
 	}
-	
+
 }
