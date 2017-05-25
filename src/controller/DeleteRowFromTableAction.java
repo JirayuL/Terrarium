@@ -1,4 +1,4 @@
-package terrariumUI;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import application.CashierMachine;
+import terrariumUI.TerrariumUI;
 
 /**
  * Class for delete selected item action of the table to perform.
