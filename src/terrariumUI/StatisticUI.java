@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import controller.CashierMachine;
 import controller.ProductsSales;
 
 /**
@@ -22,7 +25,7 @@ import controller.ProductsSales;
  * @author Wanchanapon Thanwaranurak
  * @version 25/5/2017
  */
-public class StatisticUI {
+public class StatisticUI implements Observer{
 	private static StatisticUI instance;
 	private JFrame frame,jframe;
 	private JPanel contentPane;
@@ -96,15 +99,7 @@ public class StatisticUI {
 		btnSelectDate.addActionListener((e) -> {
 			jframe = new JFrame();
 			txtDate.setText(new DatePickerUI(jframe).setPickedDate());
-			setNumbertoZero();
-			clearAllTable();
-			ProductsSales.getInstance().resetTotal();
-			date = txtDate.getText();
-			mapProductsDay = ProductsSales.getInstance().getProductsDay(date);
-			for(Map.Entry< String, List<String> > entry : mapProductsDay.entrySet()){
-				dmodel.addRow(new String[] { String.format("%d", ++number), date ,entry.getKey(), entry.getValue().get(0) , entry.getValue().get(1), String.format("%.2f",Double.parseDouble(entry.getValue().get(2)))});
-			}
-			labelShowTotal.setText(String.format("%.2f", ProductsSales.getInstance().getTotal()));
+			displayStatistic(ProductsSales.getInstance());
 		});
 		frame.getContentPane().add(btnSelectDate);
 
@@ -169,4 +164,35 @@ public class StatisticUI {
 	protected void setNumbertoZero() {
 		number = 0;
 	}
+	
+	/**
+	 * Show a data of statistic in UI
+	 * @param productsSales is a ProductsSales object that contain information of statistic
+	 */
+	public void displayStatistic(ProductsSales productsSales){
+		setNumbertoZero();
+		clearAllTable();
+		productsSales.resetTotal();
+		clearAllTable();
+		date = txtDate.getText();
+		mapProductsDay = productsSales.getProductsDay(date);
+		for(Map.Entry< String, List<String> > entry : mapProductsDay.entrySet()){
+			dmodel.addRow(new String[] { String.format("%d", ++number), date ,entry.getKey(), entry.getValue().get(0) , entry.getValue().get(1), String.format("%.2f",Double.parseDouble(entry.getValue().get(2)))});
+		}
+		labelShowTotal.setText(String.format("%.2f", ProductsSales.getInstance().getTotal()));
+	}
+	
+	/**
+	 * Update of view of statistic, when statistic change
+	 */
+	@Override
+	public void update(Observable subject, Object info) {
+		if (info != null)
+			System.out.println(info);
+		if (subject instanceof ProductsSales) {
+			ProductsSales productsSales = (ProductsSales) subject;
+			displayStatistic(productsSales);
+		}
+	}
+	
 }

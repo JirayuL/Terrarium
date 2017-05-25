@@ -264,8 +264,7 @@ public class TerrariumUI extends JFrame implements Observer {
 	/**
 	 * Update the data when add the same product.
 	 * 
-	 * @param id
-	 *            of the product.
+	 * @param id of the product.
 	 */
 	private void updateTable(String id) {
 		for (int i = 0; i < dmodel.getRowCount(); i++) {
@@ -312,5 +311,4 @@ public class TerrariumUI extends JFrame implements Observer {
 			labelSubtotal.setText(String.format("%.2f", cashierMachine.getSubtotal()));
 		}
 	}
-
 }

@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import controller.CashierMachine;
+import controller.ProductsSales;
 
 /**
  * ChangeGUI is a GUI of show a change to return customer
@@ -72,6 +73,7 @@ public class ChangeUI implements Observer{
 			TerrariumUI.getInstance().clearAllTable();
 			TerrariumUI.getInstance().clearMap();
 			cashier.resetCashierMachine();
+			ProductsSales.getInstance().updateProductSales();
 			close();
 		});
 		frame.getContentPane().add(btnEnd);
@@ -91,9 +93,11 @@ public class ChangeUI implements Observer{
 		frame.setVisible(false);
 	}
 
+	/**
+	 * Update of lblShowChange, when change money change
+	 */
 	@Override
 	public void update(Observable subject, Object info) {
-		// TODO Auto-generated method stub
 		if (info != null)
 			System.out.println(info);
 		if (subject instanceof CashierMachine) {

@@ -15,17 +15,13 @@ import terrariumUI.TerrariumUI;
 public class Main {
 	public static void main(String[] args) {
 		CashierMachine cashier = CashierMachine.getInstance();
-		TerrariumUI terrariumGUI = TerrariumUI.getInstance();
-		PaymentUI paymentGUI = PaymentUI.getInstance();
-		ChangeUI changeGUI = ChangeUI.getInstance();
-		cashier.addObserver(terrariumGUI);
-		cashier.addObserver(paymentGUI);
-		cashier.addObserver(changeGUI);
-
+		cashier.addObserver(TerrariumUI.getInstance());
+		cashier.addObserver(PaymentUI.getInstance());
+		cashier.addObserver(ChangeUI.getInstance());
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					terrariumGUI.run();
+					TerrariumUI.getInstance().run();
 				} catch (Exception e) {
 					// DO nothing
 				}

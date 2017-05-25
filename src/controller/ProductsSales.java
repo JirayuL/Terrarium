@@ -5,16 +5,19 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import database.Sales;
 import database.Store;
+import terrariumUI.StatisticUI;
 
 /**
  * ProductsSales for calculate and check date that user choose.
  * @author Wanchanapon Thanwaranurak
  * @version 25/5/2017
  */
-public class ProductsSales {
+public class ProductsSales extends Observable{
 	private static ProductsSales instance;
 	private Map<String, List<String>> productSales;
 	private Map<String, List<String>> productMap;
@@ -25,6 +28,7 @@ public class ProductsSales {
 	 * Create constructor 
 	 */
 	ProductsSales(){
+		this.addObserver(StatisticUI.getInstance());
 		productSales = Sales.getInstance().getSalesDatabase();
 		productMap = Store.getInstance().getProductMap();
 		mapProductsDay = new HashMap<>();
@@ -91,5 +95,14 @@ public class ProductsSales {
 	 */
 	public void resetTotal() {
 		total = 0;
+	}
+	
+	/**
+	 * Update products of sales of database
+	 */
+	public void updateProductSales(){
+		productSales = Sales.getInstance().getSalesDatabase();
+		setChanged();
+		notifyObservers();
 	}
 }
