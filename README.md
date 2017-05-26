@@ -13,25 +13,47 @@ This project was inspired by the **Wannasit** store. **Wannasit** store is my fr
 - Safekeeping the sales data in the database
 - Calculate the daily statistics of the sales
 
+## Design Patterns
+| Pattern    | Description/Reason | Classes |
+|:----------:|:-----------:|:-------:|
+| Singleton  | The singleton pattern was used in many classes within this project as a global data store. | TerrariumUI, PaymentUI, CashierMachine, ChangeUI, Store, ProductsSale, StatisticUI, Sales |
+| Model-View-Controller (MVC) | The MVC pattern was used for separate application's concerns | Model : Store, Sales View : all of UI Controller : CashierMachine, ProductsSales |
+| Composite | The Composite pattern was used in many UI. | All components of the JFrame and JFrame itself |
+| Observer | The observer pattern was used in various GUI classes as it enables low coupling between the controller classes and the GUI itself. | Observer : PaymentUI, ChangeUI, TerrariumUI, StatisticUI Observable : CashierMachine, ProductsSales  |
+
 ## User Interface
 
-![alt text](http://158.108.44.66:5000/uploads/TerrariumMainPage.png)
+![Main Page](http://158.108.44.66:5000/uploads/TerrariumMainPage.png)
 
-![alt text](http://158.108.44.66:5000/uploads/TerrariumPayment.png)
+![PaymentUI](http://158.108.44.66:5000/uploads/TerrariumPayment.png)
 
-![alt text](http://158.108.44.66:5000/uploads/TerrariumChange.png)
+![ChangeUI](http://158.108.44.66:5000/uploads/TerrariumChange.png)
 
-![alt text](http://158.108.44.66:5000/uploads/TerrariumStatistic.png)
+![StatisticUI](http://158.108.44.66:5000/uploads/TerrariumStatistic.png)
 
 ## UML Diagram for Terrarium
 
-![alt text](http://158.108.44.66:5000/uploads/UML%20Class%20Diagram.png)
+![UML](http://158.108.44.66:5000/uploads/UML%20Class%20Diagram.png)
 
-## Installation
+## Get It Running
+### Download
+Click [here](https://github.com/JirayuL/Terrarium/releases/latest) to get the latest version. Or go to [releases](https://github.com/JirayuL/Terrarium/releases) to see all versions
 
-Click the following link.
+### Install
+No installation required, use the command below to start the application
+```
+java -jar Terrarium.jar
+```
 
-- link : [Get it here!](https://github.com/JirayuL/Terrarium/releases/latest)
+
+## Value Proposition
+### Why did this worth doing?
+Because this software can help offloading the boring and error-prone job of stock keeping and accounting to computer-based system. And we expect that to help speed up the business operations and push the business forward.
+
+### What did you learn?
+- Using softwares to help businesses in their operations
+- Using `Actions` with `JTable`
+- Utilizing database as a storage for Java application
 
 ## Contributors
 
