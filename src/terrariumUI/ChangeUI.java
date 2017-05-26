@@ -54,6 +54,8 @@ public class ChangeUI implements Observer{
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(500, 300, 330, 280);
+		frame.setTitle("Change");
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 

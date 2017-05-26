@@ -40,6 +40,8 @@ class DatePickerUI{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(JFrame parent) {
+		parent.setTitle("Calendar");
+		parent.setResizable(false);
 		label = new JLabel("", JLabel.CENTER);
 		button = new JButton[49];
 		dialog = new JDialog();
@@ -93,13 +95,13 @@ class DatePickerUI{
 	 */
 	public void displayDate() {
 		for (int x = 7; x < button.length; x++) button[x].setText("");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");	
-		Calendar cal = Calendar.getInstance();			
-		cal.set(year, month, 1);
-		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-		int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");	
+		Calendar calendar = Calendar.getInstance();			
+		calendar.set(year, month, 1);
+		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+		int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 		for (int x = 6 + dayOfWeek, day = 1; day <= daysInMonth; x++, day++) button[x].setText("" + day);
-		label.setText(sdf.format(cal.getTime()));
+		label.setText(simpleDateFormat.format(calendar.getTime()));
 		dialog.setTitle("Date Picker");
 	}
 
@@ -109,10 +111,10 @@ class DatePickerUI{
 	 */
 	public String setPickedDate() {
 		if (day.equals("")) return day;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar cal = Calendar.getInstance();
-		cal.set(year, month, Integer.parseInt(day));
-		return sdf.format(cal.getTime());
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(year, month, Integer.parseInt(day));
+		return simpleDateFormat.format(calendar.getTime());
 	}
 }
 

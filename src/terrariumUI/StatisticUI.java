@@ -65,6 +65,7 @@ public class StatisticUI implements Observer {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Statistic");
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 500, 350);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);

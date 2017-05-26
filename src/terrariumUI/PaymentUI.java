@@ -79,6 +79,8 @@ public class PaymentUI extends JFrame implements Observer {
 	 */
 	private void initialize() throws IOException {
 		frame = new JFrame();
+		frame.setTitle("Cashier Machine");
+		frame.setResizable(false);
 		frame.setBounds(700, 30, 680, 370);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
