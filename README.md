@@ -14,12 +14,37 @@ This project was inspired by the **Wannasit** store. **Wannasit** store is my fr
 - Calculate the daily statistics of the sales
 
 ## Design Patterns
-| Pattern    | Description/Reason | Classes |
-|:----------:|:-----------:|:-------:|
-| Singleton  | The singleton pattern was used in many classes within this project as a global data store. | TerrariumUI, PaymentUI, CashierMachine, ChangeUI, Store, ProductsSale, StatisticUI, Sales |
-| Model-View-Controller (MVC) | The MVC pattern was used for separate application's concerns | Model : Store, Sales View : all of UI Controller : CashierMachine, ProductsSales |
-| Composite | The Composite pattern was used in many UI. | All components of the JFrame and JFrame itself |
-| Observer | The observer pattern was used in various GUI classes as it enables low coupling between the controller classes and the GUI itself. | Observer : PaymentUI, ChangeUI, TerrariumUI, StatisticUI Observable : CashierMachine, ProductsSales  |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Pattern</th>
+      <th style="text-align: left">Description/Reason</th>
+      <th style="text-align: left">Classes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Singleton</td>
+      <td style="text-align: left">The singleton pattern was used in many classes within this project as a global data store.</td>
+      <td style="text-align: left">TerrariumUI, PaymentUI, CashierMachine, ChangeUI, Store, ProductsSale, StatisticUI, Sales</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Model-View-Controller (MVC)</td>
+      <td style="text-align: left">The MVC pattern was used for separate application's concerns</td>
+      <td style="text-align: left">Model : Store, Sales <br> View : all of UI <br> Controller : CashierMachine, ProductsSales</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Composite</td>
+      <td style="text-align: left">The Composite pattern was used in many UI.</td>
+      <td style="text-align: left">All components of the JFrame and JFrame itself</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Observer</td>
+      <td style="text-align: left">The observer pattern was used in various GUI classes as it enables low coupling between the controller classes and the GUI itself.</td>
+      <td style="text-align: left">Observer : PaymentUI, ChangeUI, TerrariumUI, StatisticUI <br> Observable : CashierMachine, ProductsSales</td>
+    </tr>
+  </tbody>
+</table>
 
 ## User Interface
 
