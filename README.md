@@ -1,5 +1,8 @@
 # Terrarium
 
+## Terrarium Page
+Click [here](https://jirayul.github.io/Terrarium/) to see my page.
+
 ## Introduction
 
 Today, even a small convenience store has so many kind of items in their stock for them to manage. And things get even worse for a wholesale business, of which in their stock might be up to a thousand kinds of goods. The traditional paper-based solution are clumsy and error prone, so we think maybe it's the time for a computer-based solution for the of business. We expect this solution to help the wholesale business in managing their stock and keeping track of the price of each item.
@@ -79,9 +82,6 @@ Because this software can help offloading the boring and error-prone job of stoc
 - Using softwares to help businesses in their operations
 - Using `Actions` with `JTable`
 - Utilizing database as a storage for Java application
-
-## My Terrarium Page
-Click [here](https://jirayul.github.io/Terrarium/) to see my page.
 
 ## Contributors
 
